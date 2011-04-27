@@ -26,5 +26,5 @@ TARGET_PREBUILT_KERNEL := device/asus/tf101/kernel
 #Coustom Recovery UI
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/asus/tf101/recovery_ui.c
 
-#BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_HAS_NO_SELECT_BUTTON := true
 
