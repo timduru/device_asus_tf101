@@ -19,12 +19,11 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08c60000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-BOARD_HAS_NO_MISC_PARTITION := true
-
 TARGET_PREBUILT_KERNEL := device/asus/tf101/kernel
 
-#Coustom Recovery UI
+#Custom Recovery UI
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/asus/tf101/recovery_ui.c
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-
+# Use this flag if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
