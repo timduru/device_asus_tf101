@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2011 The Android Open-Source Project
+# Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+#
+# Input Device Configuration File for the Atmel Maxtouch touch screen.
+#
+# These calibration values are derived from empirical measurements
+# and may not be appropriate for use with other touch screens.
+# Refer to the input device configuration documentation for more details.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_tf101.mk
+# Basic Parameters
+touch.deviceType = pointer
+touch.orientationAware = 1
+touch.gestureMode = spots
+device.external = 1
+touch.usingJitterFilter = 1
+

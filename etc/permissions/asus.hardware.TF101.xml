@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<permissions>
+    <feature name="android.hardware.camera" />
+    <feature name="android.hardware.camera.autofocus" />
+    <feature name="android.hardware.camera.front" />
+    <feature name="android.hardware.location.gps" />
+    <feature name="android.hardware.sensor.gyroscope" />
+    <feature name="android.hardware.sensor.light" />
+    <feature name="android.hardware.touchscreen.multitouch.jazzhand" />
+    <feature name="android.hardware.faketouch" />
+    <feature name="android.hardware.wifi" />
+    <feature name="android.hardware.usb.host" />
+    <feature name="android.hardware.usb.accessory" />
+    <library name="com.android.future.usb.accessory"
+             file="/system/framework/com.android.future.usb.accessory.jar" />
+
+    <!-- Asus epad hardware feature-->
+    <feature name="asus.hardware.dock" />
+    <feature name="asus.hardware.hall_sensor" />
+    <feature name="asus.hardware.keyboard" />
+</permissions>
