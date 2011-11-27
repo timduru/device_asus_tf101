@@ -135,9 +135,9 @@ service bugreport /system/bin/dumpstate -d -v -o /data/storage/bugreports/bugrep
     keycodes 115 114
 
 #BCM
-service hciattach /system/bin/brcm_patchram_plus --enable_hci \
-    --baudrate 3000000 --patchram /etc/firmware/bcm4329.hcd --pcm_role slave \
-    --enable_lpm /dev/ttyHS2
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
+    --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
+    --patchram /system/etc/firmware/bcm4329.hcd /dev/ttyHS2
     class main
     user root
     group system bluetooth net_bt_admin misc
