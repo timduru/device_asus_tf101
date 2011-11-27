@@ -123,7 +123,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=adb
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
