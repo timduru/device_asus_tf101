@@ -199,4 +199,6 @@
         <item>10</item>
     </integer-array>
 
+    <!-- The number of degrees to rotate the display when the keyboard is open. -->
+    <integer name="config_lidOpenRotation">-1</integer>
 </resources>
