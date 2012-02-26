@@ -24,6 +24,8 @@
 # by BoardConfigVendor.mk
 USE_CAMERA_STUB := true
 
+# Use a smaller subset of system fonts to keep image size lower
+SMALLER_FONT_FOOTPRINT := true
 # Use the non-open-source parts, if they're present
 -include vendor/asus/tf101/BoardConfigVendor.mk
 
@@ -80,8 +82,8 @@ BOARD_HOSTAP_DRIVER := WEXT
 BOARD_HOSTAP_PRIVATE_LIB := lib_driver_cmd_wext
 BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/system/etc/fw_bcm4329.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/system/etc/fw_bcm4329_apsta.bin"
+WIFI_DRIVER_FW_STA_PATH     := "/system/etc/firmware/fw_bcm4329.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/system/etc/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_NAME     :=  "bcm4329"
 WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/system/etc/firmware/fw_bcm4329.bin nvram_path=/system/etc/wifi/bcm4329.cal iface_name=wlan0"
 
@@ -90,10 +92,15 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/asus/tf101/recovery_ui.c
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
+BOARD_USES_GENERIC_AUDIO := false
+
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
-#BOARD_LIB_DUMPSTATE := libdumpstate.tf101
+BOARD_HAVE_GPS := true
+
+# Custom Tools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/asus/tf101/releasetools/tf101_ota_from_target_files
 
 # Use this flag if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true

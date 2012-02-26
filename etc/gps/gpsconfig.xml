@@ -11,13 +11,7 @@
     lcsApiSockName="/dev/socket/gps"
     gpioNStdbyPath="/sys/class/gpio/gpio203/value"
     acNvStoDir="/data/gps/"
-    acNmeaOutName="/data/gps/nmeapipe"
-    arp-supl-enable="true"
-    arp-supl-cap-msb="true"
-    arp-supl-cap-msa="true"
-    arp-supl-cap-ecid="false"
-    acSuplServer="supl.google.com"
-    SuplPort="7276"
+    acNmeaOutName="/data/gps/nmeapipe"  
 />
 
 <!-- GPS configuration with standalone 16.8 MHz TCXO  -->

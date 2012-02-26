@@ -1,21 +1,28 @@
+import init.tf101.usb.rc
+
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+
     export EXTERNAL_STORAGE /mnt/sdcard
     mkdir /mnt/sdcard 0000 system system
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
 
+
     # create directory for mounting usb drives
-    #mkdir /mnt/usbdrive 0666 system system
-    #symlink /mnt/usbdrive /usbdrive
-    #remark /mnt/usbdrive, use ASUS defined mount points
     mkdir /Removable 0755 media_rw media_rw
+
+    # temp fix for external storage mounts
+    mkdir /Removable/MicroSD 0666 system system
+    mkdir /Removable/SD 0666 system system
+    mkdir /Removable/USBdisk1 0666 system system
+    mkdir /Removable/USBdisk2 0666 system system
 
 on fs
     mount ext4 /dev/block/mmcblk0p1 /system wait ro
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
-    mount ext4 /dev/block/mmcblk0p7 /data wait noatime nosuid nodev
-    mount ext4 /dev/block/mmcblk0p2 /cache wait noatime nosuid nodev
+    mount ext4 /dev/block/mmcblk0p7 /data wait noatime nodiratime nosuid nodev nodelalloc,errors=panic
+    mount ext4 /dev/block/mmcblk0p2 /cache wait noatime nodiratime nosuid nodev nodelalloc,errors=panic
     mount tmpfs tmpfs /Removable mode=0755,gid=1000
 
 on post-fs-data
@@ -23,6 +30,8 @@ on post-fs-data
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+
+    mkdir /data/misc/wminput 0776 system system
 
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
@@ -48,8 +57,6 @@ on boot
     chown bluetooth bluetooth /system/etc/bluetooth
     setprop ro.bt.bdaddr_path "/system/etc/bluetooth/bdaddr"
 
-#NTFS file system support
-    insmod /sbin/tntfs.ko
 # backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
 
@@ -62,7 +69,9 @@ on boot
     chmod 666 /dev/nvhost-isp
     chmod 666 /dev/nvhost-mpe
     chmod 666 /dev/nvhost-vi
-    chmod 664 /sys/devices/platform/tegra-i2c.1/i2c-2/2-001c/show_lux
+    chmod 664 /sys/bus/iio/devices/device0/illuminance0_input
+    chmod 664 /sys/bus/iio/devices/device0/proximity_raw
+
 
 # Power management settings
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 216000
@@ -72,25 +81,51 @@ on boot
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1000000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load 80
+    write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
-# GPS
-    write /sys/class/gpio/export 203
-    write /sys/class/gpio/gpio203/value 0
-    write /sys/class/gpio/gpio203/direction out
+# Touchscreen Config-UI interface
+   chmod 666 /sys/devices/platform/tegra-i2c.0/i2c-0/0-005a/debug_enable
+   chmod 666 /sys/devices/platform/tegra-i2c.0/i2c-0/0-005a/pause_driver
+   chmod 666 /sys/devices/platform/tegra-i2c.0/i2c-0/0-005a/slowscan_enable
+
+# Default Read Ahead value for sdcards
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+
+# Wiimote connect status
+    write /data/misc/wminput/connected 0
+    chmod 0666 /data/misc/wminput/connected
+
+#GPS
     mkdir /data/gps
     chown system system /data/gps
     chmod 770 /data/gps
+    chown root system /dev/ttyHS1
+    chmod 0664 /dev/ttyHS1
 
-# qmi
-    chown radio system /sys/log_detect/log_enabled
+# GPS init
+    write /sys/class/gpio/export 203
+    write /sys/class/gpio/gpio203/value 0
+    write /sys/class/gpio/gpio203/direction out
+    chown root system /sys/class/gpio/gpio203/value
+    chmod 0664 /sys/class/gpio/gpio203/value
+
+#NTFS exFAT support
+    insmod /sbin/tntfs.ko
+    insmod /sbin/texfat.ko
 
 # RIL
 # Define TCP buffer sizes for hspa networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax
     setprop net.tcp.buffersize.umts  4096,87380,524288,4096,87380,524288
     setprop net.tcp.buffersize.hspa  4096,87380,524288,4096,87380,524288
     setprop net.tcp.buffersize.hsdpa 4096,87380,524288,4096,87380,524288
     setprop net.tcp.buffersize.hsupa 4096,87380,524288,4096,87380,524288
+
+# Write Wi-Fi Mac
+service wifimacwriter /system/bin/wifimacwriter
+    class main
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
@@ -103,23 +138,52 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service dhcpcd /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL -f /system/etc/dhcpcd/dhcpcd.conf
     class main
     disabled
     oneshot
 
-service iprenew /system/bin/dhcpcd -n
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
+    disabled
+    oneshot
+
+# bluetooth
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+    class main
     disabled
     oneshot
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+#Sensor: load calibration files.
+    service sensors-config /system/bin/sensors-config
+    class main
+    user root
+    oneshot
+#Sensor load calibration files end
 
 # create virtual SD card at /mnt/sdcard, based on the /data/media directory
 # deamon will drop to user/group system/media_rw after initializing
@@ -136,56 +200,61 @@ service bugreport /system/bin/dumpstate -d -v -o /data/storage/bugreports/bugrep
 
 #BCM
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
-    --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
+    --tosleep=50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
     --patchram /system/etc/firmware/bcm4329.hcd /dev/ttyHS2
     class main
     user root
     group system bluetooth net_bt_admin misc
-    oneshot
     disabled
 
 # Start GPS daemon
-service gps-daemon /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
-    class late_start
-    user root
-    group root
-
-# Write Wi-Fi Mac
-service wifiloader /system/bin/wifiloader
-    class main
-    oneshot
+  on boot
+  service gps-daemon /system/bin/glgps -c /system/etc/gps/gpsconfig.xml
+  user root
+  group root 
+  class late_start
 
 # Mount usb drives as /usbdrive. Generally usb drives are formatted with FAT
 # filesystem, so we support FAT as of now.
-#remark for now, use ASUS's USB disk support
 #on device-added-/sys/block/sda
 #    mount vfat /dev/block/sda /mnt/usbdrive
 
 #on device-removed-/sys/block/sda
 #    umount /mnt/usbdrive
 
-#Prepare TF service
-service tf_daemon /system/bin/tf_daemon -storageDir /data/tf
+# Recovery daemon: configure MSC partition
+#service recoveryd /system/bin/recoveryd /dev/block/platform/sdhci-tegra.3/by-num/p5
+#    disabled
+#    class main
+#    user root
+#    group root
+#    oneshot
+
+#on property:sys.shutdown.requested=1recovery
+#    start recoveryd
+
+# Prepare TF service
+service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
     disabled
     class main
     user root
     group shell
     oneshot
 
-#Create data directory and start service
+# Create data directory and start service
 on property:tf.enable=y
     mkdir /data/tf
     start tf_daemon
 
-service SerialAttach /system/bin/SerialAttach
+service BtService /system/bin/sh /system/etc/BtService.sh
+     user root
+     group root
+     disabled
+     oneshot
+
+service ps3service /system/bin/ps3service
+    class main
     user root
     group root
     disabled
     oneshot
-
-#Sensor: load calibration files.
-    service sensors-config /system/bin/sensors-config
-    class main
-    user root
-    oneshot
-#Sensor load calibration files end

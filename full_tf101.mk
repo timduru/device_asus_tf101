@@ -30,8 +30,14 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-# Camera
+# A few more packages that aren't quite used on all builds
 PRODUCT_PACKAGES := \
+	HoloSpiralWallpaper \
+	LiveWallpapersPicker \
+	VisualizationWallpapers
+
+# Camera
+PRODUCT_PACKAGES += \
     Camera
 
 # Inherit from those products. Most specific first.
@@ -43,8 +49,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 $(call inherit-product, device/asus/tf101/device.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+# Discard inherited values and use our own instead.
 PRODUCT_NAME := full_tf101
 PRODUCT_DEVICE := tf101
-PRODUCT_BRAND := Android
+PRODUCT_BRAND := asus
 PRODUCT_MODEL := TF101
+PRODUCT_MANUFACTURER := Asus
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_ID=IML77 \
+    BUILD_DISPLAY_ID="EOS IML74K Nightly $(EOS_BUILD_NUMBER) (`(cd $(ANDROID_BUILD_TOP)/.repo/manifests ; git log -1 --pretty=%h versioned.xml)`)" \
+    BUILD_FINGERPRINT="asus/tf101:4.0.3/IML77/239789:user/release-keys" \
+    PRIVATE_BUILD_DESC="tf101-user 4.0.3 IML77 239789 release-keys"

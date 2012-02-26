@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+**
+** Copyright 2010, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License")
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+<device name="Android">
+  <item name="none">0</item>
+  <item name="screen.on">126.602</item>
+  <item name="bluetooth.active">173.875</item>
+  <item name="bluetooth.on">168.317</item>
+  <item name="screen.full">369.825</item>
+  <item name="wifi.on">167.332</item>
+  <item name="wifi.active">270.398</item>
+  <item name="wifi.scan">170.991</item>
+  <item name="dsp.audio">169.232</item>
+  <item name="dsp.video">218.682</item>
+  <item name="radio.active">0</item>
+  <item name="radio.scanning">185.665</item>
+  <item name="gps.on">140.496</item>
+  <array name="radio.on">
+      <value>173.494</value>
+      <value>171.273</value>
+      <value>172.281</value>
+      <value>167.149</value>
+      <value>175.280</value>
+  </array>
+      <!-- Different CPU speeds as reported in
+       /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state -->
+  <array name="cpu.speeds">
+      <value>216000</value>
+      <value>312000</value>
+      <value>456000</value>
+      <value>608000</value>
+      <value>760000</value>
+      <value>816000</value>
+      <value>912000</value>
+      <value>1000000</value>
+  </array>
+  <!-- Power consumption when CPU is idle -->
+  <item name="cpu.idle">6.7</item>
+  <!-- Power consumption at different speeds -->
+  <array name="cpu.active">
+      <value>180.105</value>
+      <value>180.832</value>
+      <value>209.809</value>
+      <value>223.262</value>
+      <value>232.382</value>
+      <value>244.185</value>
+      <value>245.591</value>
+      <value>254.439</value>
+  </array>
+  <!-- This is the battery capacity in mAh -->
+  <item name="battery.capacity">3300</item>
+</device>
