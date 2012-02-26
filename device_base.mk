@@ -31,8 +31,11 @@ DEVICE_PACKAGE_OVERLAYS := device/asus/tf101/overlay
 
 PRODUCT_COPY_FILES := \
     $(LOCAL_KERNEL):kernel \
+    device/asus/tf101/lib/egl/libEGL_perfhud.so:system/lib/egl/libEGL_perfhud.so \
     device/asus/tf101/lib/egl/libEGL_tegra.so:system/lib/egl/libEGL_tegra.so \
+    device/asus/tf101/lib/egl/libGLESv1_CM_perfhud.so:system/lib/egl/libGLESv1_CM_perfhud.so \
     device/asus/tf101/lib/egl/libGLESv1_CM_tegra.so:system/lib/egl/libGLESv1_CM_tegra.so \
+    device/asus/tf101/lib/egl/libGLESv2_perfhud.so:system/lib/egl/libGLESv2_perfhud.so \
     device/asus/tf101/lib/egl/libGLESv2_tegra.so:system/lib/egl/libGLESv2_tegra.so \
     device/asus/tf101/lib/hw/audio.a2dp.default.so:system/lib/hw/audio.a2dp.default.so \
     device/asus/tf101/lib/hw/audio_policy.tegra.so:system/lib/hw/audio_policy.tegra.so \
