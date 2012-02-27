@@ -12,18 +12,18 @@ on early-init
     # create directory for mounting usb drives
     mkdir /Removable 0755 media_rw media_rw
 
+on fs
+    mount ext4 /dev/block/mmcblk0p1 /system wait noauto_da_alloc ro
+    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
+    mount ext4 /dev/block/mmcblk0p7 /data wait noatime nodiratime nosuid nodev noauto_da_alloc,errors=panic
+    mount ext4 /dev/block/mmcblk0p2 /cache wait noatime nodiratime nosuid nodev noauto_da_alloc,errors=panic
+    mount tmpfs tmpfs /Removable mode=0755,gid=1000
+
     # temp fix for external storage mounts
     mkdir /Removable/MicroSD 0666 system system
     mkdir /Removable/SD 0666 system system
     mkdir /Removable/USBdisk1 0666 system system
     mkdir /Removable/USBdisk2 0666 system system
-
-on fs
-    mount ext4 /dev/block/mmcblk0p1 /system wait ro
-    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
-    mount ext4 /dev/block/mmcblk0p7 /data wait noatime nodiratime nosuid nodev nodelalloc,errors=panic
-    mount ext4 /dev/block/mmcblk0p2 /cache wait noatime nodiratime nosuid nodev nodelalloc,errors=panic
-    mount tmpfs tmpfs /Removable mode=0755,gid=1000
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
