@@ -37,7 +37,6 @@ PRODUCT_COPY_FILES := \
     device/asus/tf101/lib/egl/libGLESv1_CM_tegra.so:system/lib/egl/libGLESv1_CM_tegra.so \
     device/asus/tf101/lib/egl/libGLESv2_perfhud.so:system/lib/egl/libGLESv2_perfhud.so \
     device/asus/tf101/lib/egl/libGLESv2_tegra.so:system/lib/egl/libGLESv2_tegra.so \
-    device/asus/tf101/lib/hw/audio.a2dp.default.so:system/lib/hw/audio.a2dp.default.so \
     device/asus/tf101/lib/hw/audio_policy.tegra.so:system/lib/hw/audio_policy.tegra.so \
     device/asus/tf101/lib/hw/audio.primary.tegra.so:system/lib/hw/audio.primary.tegra.so \
     device/asus/tf101/lib/hw/camera.tegra.so:system/lib/hw/camera.tegra.so \
@@ -216,7 +215,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/etc/permissions/com.asus.hardware.00.xml:system/etc/permissions/com.asus.hardware.00.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
     audio.a2dp.default \
     librs_jni \
     make_ext4fs \
