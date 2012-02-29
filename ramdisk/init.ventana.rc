@@ -138,7 +138,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL -f /system/etc/dhcpcd/dhcpcd.conf
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
@@ -148,13 +148,12 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
     disabled
     oneshot
 
-# bluetooth
 service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL -f/system/etc/dhcpcd/dhcpcd.conf
     class main
     disabled
     oneshot
@@ -199,9 +198,8 @@ service bugreport /system/bin/dumpstate -d -v -o /data/storage/bugreports/bugrep
     keycodes 115 114
 
 #BCM
-service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --enable_lpm \
-    --tosleep=50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
-    --patchram /system/etc/firmware/bcm4329.hcd /dev/ttyHS2
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --scopcm=0,2,0,0,0,0,0,0,0,0 \
+    --baudrate 3000000 --patchram /etc/firmware/bcm4329.hcd --enable_lpm --tosleep=50000 /dev/ttyHS2
     class main
     user root
     group system bluetooth net_bt_admin misc

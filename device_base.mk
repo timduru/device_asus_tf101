@@ -120,11 +120,11 @@ PRODUCT_COPY_FILES += \
 
 # Misc
 PRODUCT_COPY_FILES += \
-    device/asus/tf101/init.ventana.rc:root/init.ventana.rc \
-    device/asus/tf101/init.tf101.usb.rc:root/init.tf101.usb.rc \
+    device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
+    device/asus/tf101/ramdisk/init.tf101.usb.rc:root/init.tf101.usb.rc \
     device/asus/tf101/ramdisk/sbin/texfat.ko:root/sbin/texfat.ko \
     device/asus/tf101/ramdisk/sbin/tntfs.ko:root/sbin/tntfs.ko \
-    device/asus/tf101/ueventd.ventana.rc:root/ueventd.ventana.rc \
+    device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc \
     device/asus/tf101/bin/sensors-config:system/bin/sensors-config \
     device/asus/tf101/bin/glgps:system/bin/glgps \
     device/asus/tf101/bin/wifimacwriter:system/bin/wifimacwriter \
