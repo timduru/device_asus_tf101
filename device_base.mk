@@ -187,8 +187,8 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/xbin/remount:system/xbin/remount
 
 PRODUCT_PROPERTY_OVERRIDES := \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15
+    wifi.interface=wlan0
+#    wifi.supplicant_scan_interval=15
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -241,9 +241,8 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, vendor/asus/tf101/device-vendor.mk)
 
-BOARD_WLAN_DEVICE_REV := bcm4329
-WIFI_BAND             := 802_11_ABGN
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+#WIFI_BAND             := 802_11_ABGN
+#$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 ifneq ($(EOS_RELEASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
