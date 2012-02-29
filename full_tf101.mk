@@ -53,9 +53,11 @@ $(call inherit-product, device/asus/tf101/device.mk)
 PRODUCT_NAME := full_tf101
 PRODUCT_DEVICE := tf101
 PRODUCT_BRAND := asus
-PRODUCT_MODEL := TF101
-PRODUCT_MANUFACTURER := Asus
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_ID=IML77 \
+PRODUCT_MODEL := EPAD
+PRODUCT_MANUFACTURER := asus
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_ID=IML74K \
+    PRODUCT_NAME=US_epad \
     BUILD_DISPLAY_ID="EOS IML74K Nightly $(EOS_BUILD_NUMBER) (`(cd $(ANDROID_BUILD_TOP)/.repo/manifests ; git log -1 --pretty=%h versioned.xml)`)" \
-    BUILD_FINGERPRINT="asus/tf101:4.0.3/IML77/239789:user/release-keys" \
-    PRIVATE_BUILD_DESC="tf101-user 4.0.3 IML77 239789 release-keys"
+    BUILD_FINGERPRINT="asus/US_epad/EeePad:4.0.3/IML74K/US_epad-9.2.1.11-20120221:user/release-keys" \
+    PRIVATE_BUILD_DESC="US_epad-user 4.0.3 IML74K US_epad-9.2.1.11-20120221 release-keys"

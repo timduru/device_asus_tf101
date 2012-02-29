@@ -120,6 +120,7 @@ PRODUCT_COPY_FILES += \
 
 # Misc
 PRODUCT_COPY_FILES += \
+    device/asus/tf101/ramdisk/init:root/init \
     device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
     device/asus/tf101/ramdisk/init.tf101.usb.rc:root/init.tf101.usb.rc \
     device/asus/tf101/ramdisk/sbin/texfat.ko:root/sbin/texfat.ko \
