@@ -86,7 +86,7 @@ WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
 WIFI_DRIVER_FW_STA_PATH     := "/system/etc/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_AP_PATH      := "/system/etc/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_NAME     :=  "bcm4329"
-WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/system/etc/firmware/fw_bcm4329.bin nvram_path=/system/etc/wifi/bcm4329.cal iface_name=wlan0"
+WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/system/etc/firmware/fw_bcm4329.bin nvram_path=/data/misc/wifi/nvram.txt iface_name=wlan0"
 
 #Custom Recovery UI
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/asus/tf101/recovery_ui.c

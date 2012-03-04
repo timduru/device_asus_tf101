@@ -123,10 +123,9 @@ on boot
     setprop net.tcp.buffersize.hsupa 4096,87380,524288,4096,87380,524288
 
 # Write Wi-Fi Mac
-# Disabled due to instability issues with the asus binary
-#service wifimacwriter /system/bin/wifimacwriter
-#    class main
-#    oneshot
+service wifimacwriter /system/bin/wifimacwriter
+    class main
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf

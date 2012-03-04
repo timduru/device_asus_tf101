@@ -116,7 +116,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/modules/battery_rvsd.ko:system/lib/modules/battery_rvsd.ko \
     device/asus/tf101/modules/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/asus/tf101/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
-    device/asus/tf101/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko    
+    device/asus/tf101/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 # Misc
 PRODUCT_COPY_FILES += \
@@ -133,7 +133,10 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/etc/asound.conf:system/etc/asound.conf \
     device/asus/tf101/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/asus/tf101/vold.fstab:system/etc/vold.fstab \
-    device/asus/tf101/wifi/bcm4329.cal:system/etc/wifi/bcm4329.cal
+    device/asus/tf101/wifi/nvram_murata.txt:system/etc/nvram_murata.txt \
+    device/asus/tf101/wifi/nvram_nh615_sl101.txt:system/etc/nvram_nh615_sl101.txt \
+    device/asus/tf101/wifi/nvram_nh615.txt:system/etc/nvram_nh615.txt \
+    device/asus/tf101/wifi/nvram.txt:system/etc/nvram.txt
 
 # Input stuff
 PRODUCT_COPY_FILES += \
