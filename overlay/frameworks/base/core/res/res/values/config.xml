@@ -104,7 +104,7 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- The number of degrees to rotate the display when the keyboard is open. -->
-    <integer name="config_lidOpenRotation">-1</integer>
+    <integer name="config_lidOpenRotation">0</integer>
 
     <!-- Indicate whether the lid state impacts the accessibility of
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
