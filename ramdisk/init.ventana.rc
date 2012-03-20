@@ -111,7 +111,6 @@ on boot
     chmod 0664 /sys/class/gpio/gpio203/value
 
 #NTFS exFAT support
-    insmod /sbin/tntfs.ko
     insmod /sbin/texfat.ko
 
 # RIL
