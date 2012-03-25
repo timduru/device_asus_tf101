@@ -36,6 +36,7 @@
         <item>"bluetooth,7,7,2,-1,true"</item>
 
         <item>"ethernet,9,9,4,-1,true"</item>
+        <item>"wifi_p2p,13,1,0,-1,true"</item>
         <item>"bt_dun,14,14,2,-1,true"</item>
     </string-array>
 
@@ -86,8 +87,8 @@
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
 
-    <!-- Boolean indicating whether the wifi chipset has wifi direct support -->
-    <bool name="config_wifi_p2p_support">false</bool>
+    <!-- Boolean indicating whether the wifi chipset has p2p support -->
+    <bool name="config_wifi_p2p_support">true</bool>
     <!-- Device type information conforming to Annex B format in WiFi Direct specification.
          The default represents a dual-mode smartphone -->
     <string translatable="false" name="config_wifi_p2p_device_type">10-0050F204-4</string>
@@ -105,15 +106,6 @@
 
     <!-- The number of degrees to rotate the display when the keyboard is open. -->
     <integer name="config_lidOpenRotation">0</integer>
-
-    <!-- Indicate whether the lid state impacts the accessibility of
-         the physical keyboard.  0 means it doesn't, 1 means it is accessible
-         when the lid is open, 2 means it is accessible when the lid is
-         closed.  The default is 1. -->
-    <integer name="config_lidKeyboardAccessibility">0</integer>
-
-    <!-- Allow the menu hard key to be disabled in LockScreen on some devices -->
-    <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
@@ -198,6 +190,9 @@
 
     <!-- Component name of the service providing geocoder API support. -->
     <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
+
+    <!-- The default iface on which to monitor data use -->
+    <string name="config_datause_iface">wlan0</string>
 
     <!-- Flag indicating whether the current device is "voice capable".
          If true, this means that the device supports circuit-switched

@@ -114,8 +114,6 @@ PRODUCT_COPY_FILES += \
 # Modules
 PRODUCT_COPY_FILES += \
     device/asus/tf101/modules/battery_rvsd.ko:system/lib/modules/battery_rvsd.ko \
-    device/asus/tf101/modules/bcm4329.ko:system/lib/modules/bcm4329.ko \
-    device/asus/tf101/modules/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
     device/asus/tf101/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
 # Misc
@@ -163,7 +161,10 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/etc/firmware/nvmm_wavdec.axf:system/etc/firmware/nvmm_wavdec.axf \
     device/asus/tf101/etc/firmware/nvmm_wmadec.axf:system/etc/firmware/nvmm_wmadec.axf \
     device/asus/tf101/etc/firmware/nvmm_wmaprodec.axf:system/etc/firmware/nvmm_wmaprodec.axf \
-    device/asus/tf101/etc/firmware/nvrm_avp.bin:system/etc/firmware/nvrm_avp.bin
+    device/asus/tf101/etc/firmware/nvrm_avp.bin:system/etc/firmware/nvrm_avp.bin \
+    device/asus/tf101/vendor/firmware/fw_bcmdhd.bin:system/vendor/firmware/fw_bcmdhd.bin \
+    device/asus/tf101/vendor/firmware/fw_bcmdhd_apsta.bin:system/vendor/firmware/fw_bcmdhd_apsta.bin \
+    device/asus/tf101/vendor/firmware/fw_bcmdhd_p2p.bin:system/vendor/firmware/fw_bcmdhd_p2p.bin
 
 # ALSA Config files
 PRODUCT_COPY_FILES += \
@@ -209,6 +210,7 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
