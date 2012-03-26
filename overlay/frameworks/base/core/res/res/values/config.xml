@@ -235,4 +235,6 @@
     <!-- Change the default behaviour so that the mobile indicator gets hidden while wifi is on. -->
     <bool name="config_hideMobileSignalOnWifi">true</bool>
 
+    <!-- Boolean indicating whether the device has a dock battery -->
+    <bool name="config_hasDockBattery">true</bool>
 </resources>

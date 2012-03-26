@@ -98,6 +98,9 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 BOARD_HAVE_GPS := true
 
+# Support for dock battery
+TARGET_HAS_DOCK_BATTERY := true
+
 # Custom Tools
 TARGET_RECOVERY_PRE_COMMAND := "echo 'boot-recovery' > /dev/block/mmcblk0p3; sync"
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/asus/tf101/releasetools/tf101_ota_from_target_files
