@@ -1,4 +1,5 @@
-import init.tf101.usb.rc
+import init.ventana.usb.rc
+import init.ventana.keyboard.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -82,6 +83,9 @@ on boot
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load 80
     write /sys/module/cpuidle/parameters/lp2_in_idle 1
+
+# We dont want to swap keys unless needed
+    setprop sys.dockkeys.change 0
 
 # Touchscreen Config-UI interface
    chmod 666 /sys/devices/platform/tegra-i2c.0/i2c-0/0-005a/debug_enable

@@ -116,13 +116,18 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/modules/battery_rvsd.ko:system/lib/modules/battery_rvsd.ko \
     device/asus/tf101/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko
 
-# Misc
+# Ramdisk files
 PRODUCT_COPY_FILES += \
     device/asus/tf101/ramdisk/init:root/init \
     device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
-    device/asus/tf101/ramdisk/init.tf101.usb.rc:root/init.tf101.usb.rc \
-    device/asus/tf101/ramdisk/sbin/texfat.ko:root/sbin/texfat.ko \
+    device/asus/tf101/ramdisk/init.ventana.keyboard.rc:root/init.ventana.keyboard.rc \
+    device/asus/tf101/ramdisk/init.ventana.usb.rc:root/init.ventana.usb.rc \
     device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc \
+    device/asus/tf101/ramdisk/sbin/keyswap::root/sbin/keyswap \
+    device/asus/tf101/ramdisk/sbin/texfat.ko:root/sbin/texfat.ko
+
+# Misc
+PRODUCT_COPY_FILES += \
     device/asus/tf101/bin/sensors-config:system/bin/sensors-config \
     device/asus/tf101/bin/glgps:system/bin/glgps \
     device/asus/tf101/bin/wifimacwriter:system/bin/wifimacwriter \
@@ -192,11 +197,11 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0
-#    wifi.supplicant_scan_interval=15
+    wifi.supplicant_scan_interval=15
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp,adb
 
 include frameworks/base/build/tablet-dalvik-heap.mk
 
@@ -229,7 +234,8 @@ PRODUCT_PACKAGES := \
     bttest \
     com.android.future.usb.accessory \
     whisperd \
-    blobpack_tf
+    blobpack_tf \
+    AutoParts
 
 PRODUCT_CHARACTERISTICS := tablet
 
