@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Asus Transformer (TF101) Settings</string>
+
+    <!-- alerts and errors -->
+    <string name="warning">Warning</string>
+    <string name="caution_keyboard_layout">The device will reboot to change dock keyboard layout</string>
+
+    <!--preferences -->
+    <string name="keyboard_language_title">Dock Keyboard Layout</string>
+    <string name="keyboard_language_summary">Change dock keyboard layout</string>
+    <string name="dock_settings_title">Dock Settings</string>
+
+    <!-- keyboard layouts -->
+    <string name="kbl_ar_EG">Arabic Keyboard</string>
+    <string name="kbl_cs_CZ">Czech Keyboard</string>
+    <string name="kbl_da_DK">Danish Keyboard</string>
+    <string name="kbl_nl_BE">Dutch (Belgium) Keyboard</string>
+    <string name="kbl_nl_NL">Dutch (Holland) Keyboard</string>
+    <string name="kbl_en_CA">English (Canada) Keyboard</string>
+    <string name="kbl_en_GB">English (UK) Keyboard</string>
+    <string name="kbl_en_US">English (US) Keyboards</string>
+    <string name="kbl_fa_IR">Farsi Keyboard</string>
+    <string name="kbl_fi_FI">Finnish Keyboard</string>
+    <string name="kbl_fr_BE">French (Belgium) Keyboard</string>
+    <string name="kbl_fr_CA">French (Canada) Keyboard</string>
+    <string name="kbl_fr_FR">French (France) Keyboard</string>
+    <string name="kbl_fr_CH">French (Switzerland) Keyboard</string>
+    <string name="kbl_de_DE">German (Germany) Keyboard</string>
+    <string name="kbl_de_CH">German (Switzerland) Keyboard</string>
+    <string name="kbl_el_GR">Greek Keyboard</string>
+    <string name="kbl_iw_IL">Hebrew Keyboard</string>
+    <string name="kbl_hu_HU">Hungarian</string>
+    <string name="kbl_it_IT">Italian (Italy) Keyboard</string>
+    <string name="kbl_it_CH">Italian (Switzerland) Keyboard</string>
+    <string name="kbl_ko_KR">Korean Keyboard</string>
+    <string name="kbl_nb_NO">Norwegian Keyboard</string>
+    <string name="kbl_zh_CN">Pinyin Simplified Keyboard</string>
+    <string name="kbl_zh_TW">Pinyin Traditional Keyboard</string>
+    <string name="kbl_pl_PL">Polish Keyboard Keyboard</string>
+    <string name="kbl_pt_BR">Portuguese (Brazilian) Keyboard</string>
+    <string name="kbl_pt_PT">Portuguese (Portugal) Keyboard</string>
+    <string name="kbl_ru_RU">Russian Keyboard</string>
+    <string name="kbl_sk_SK">Slovakian Keyboard</string>
+    <string name="kbl_es_ES">Spanish (Spain) Keyboard</string>
+    <string name="kbl_es_US">Spanish (US) Keyboard</string>
+    <string name="kbl_sv_SE">Swedish Keyboard</string>
+    <string name="kbl_th_TH">Thai Keyboard</string>
+    <string name="kbl_tr_TR">Turkish Keyboard</string>
+
+    <!-- touchpad mode -->
+    <string name="touchpad_mode_selector">Touchpad pointer style</string>
+    <string name="touchpad_setting_title">Touchpad / Mouse</string>
+    <string name="touchpad_mode_entry_android32">Gesture mode</string>
+    <string name="touchpad_mode_entry_classic">Mouse cursor mode</string>
+    <string name="touchpad_mode_value_android32">0</string>
+    <string name="touchpad_mode_value_classic">1</string>
+</resources>
