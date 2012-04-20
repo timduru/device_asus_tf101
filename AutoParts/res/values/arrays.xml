@@ -30,6 +30,8 @@
          <item>@string/kbl_pt_PT</item>
          <item>@string/kbl_ru_RU</item>
          <item>@string/kbl_sk_SK</item>
+         <item>@string/kbl_sl_SI</item>
+         <item>@string/kbl_es_LA</item>
          <item>@string/kbl_es_ES</item>
          <item>@string/kbl_es_US</item>
          <item>@string/kbl_sv_SE</item>
@@ -67,6 +69,8 @@
          <item>qwerty-pt_PT</item>
          <item>qwerty-ru_RU</item>
          <item>qwerty-sk_SK</item>
+         <item>qwerty-sl_SI</item>
+         <item>qwerty-es_LA</item>
          <item>qwerty-es_ES</item>
          <item>qwerty-es_US</item>
          <item>qwerty-sv_SE</item>

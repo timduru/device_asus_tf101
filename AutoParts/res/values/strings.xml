@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Asus Transformer (TF101) Settings</string>
+    <string name="app_name">Asus Transformer Settings</string>
 
     <!-- alerts and errors -->
     <string name="warning">Warning</string>
@@ -42,6 +42,8 @@
     <string name="kbl_pt_PT">Portuguese (Portugal) Keyboard</string>
     <string name="kbl_ru_RU">Russian Keyboard</string>
     <string name="kbl_sk_SK">Slovakian Keyboard</string>
+    <string name="kbl_sl_SI">Slovenian Keyboard</string>
+    <string name="kbl_es_LA">Spanish (Laos) Keyboard</string>
     <string name="kbl_es_ES">Spanish (Spain) Keyboard</string>
     <string name="kbl_es_US">Spanish (US) Keyboard</string>
     <string name="kbl_sv_SE">Swedish Keyboard</string>
