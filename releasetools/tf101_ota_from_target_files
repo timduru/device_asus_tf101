@@ -51,6 +51,14 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
 
   -a  (--aslr_mode)  <on|off>
       Specify whether to turn on ASLR for the package (on by default).
+
+  --backup <boolean>
+      Enable or disable the execution of backuptool.sh.
+      Disabled by default.
+  -S  (--file_context) <file>
+      the file contexts configuration used to assign SELinux file
+      context attributes
+
 """
 
 import sys
@@ -87,6 +95,9 @@ OPTIONS.omit_prereq = False
 OPTIONS.extra_script = None
 OPTIONS.aslr_mode = True
 OPTIONS.worker_threads = 3
+OPTIONS.backuptool = True
+OPTIONS.selinux_fc = None
+
 
 LOCAL_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 DEV_OUT_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/tf101/'))
@@ -379,17 +390,22 @@ def WriteFullOTAPackage(input_zip, output_zip):
       metadata=metadata,
       info_dict=OPTIONS.info_dict)
 
-  if not OPTIONS.omit_prereq:
-    ts = GetBuildProp("ro.build.date.utc", input_zip)
-    script.AssertOlderBuild(ts)
+  #if not OPTIONS.omit_prereq:
+  #  ts = GetBuildProp("ro.build.date.utc", input_zip)
+  #  script.AssertOlderBuild(ts)
 
   AppendAssertions(script, input_zip)
   device_specific.FullOTA_Assertions()
+  if OPTIONS.backuptool:
+    script.RunBackup("backup")
 
   script.ShowProgress(0.5, 0)
 
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
+
+  if OPTIONS.selinux_fc is not None:
+    WritePolicyConfig(OPTIONS.selinux_fc, output_zip)
 
   script.FormatPartition("/system")
   script.Mount("/system")
@@ -424,6 +440,9 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   common.ZipWriteStr(output_zip, "boot.blob", blob.data)
   script.ShowProgress(0.2, 0)
+  if OPTIONS.backuptool:
+    script.ShowProgress(0.2, 10)
+    script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
   script.WriteRawImage("/staging", "boot.blob")
@@ -438,6 +457,10 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.AddToZip(input_zip, output_zip)
   WriteMetadata(metadata, output_zip)
 
+def WritePolicyConfig(file_context, output_zip):
+  f = open(file_context, 'r');
+  basename = os.path.basename(file_context)
+  common.ZipWriteStr(output_zip, basename, f.read())
 
 def WriteMetadata(metadata, output_zip):
   common.ZipWriteStr(output_zip, "META-INF/com/android/metadata",
@@ -766,12 +789,16 @@ def main(argv):
         OPTIONS.aslr_mode = False
     elif o in ("--worker_threads"):
       OPTIONS.worker_threads = int(a)
+    elif o in ("--backup"):
+      OPTIONS.backuptool = bool(a.lower() == 'true')
+    elif o in ("-S", "--file_context"):
+      OPTIONS.selinux_fc = a
     else:
       return False
     return True
 
   args = common.ParseOptions(argv, __doc__,
-                             extra_opts="b:k:i:d:wne:a:",
+                             extra_opts="b:k:i:d:wne:a:S:",
                              extra_long_opts=["board_config=",
                                               "package_key=",
                                               "incremental_from=",
@@ -780,6 +807,8 @@ def main(argv):
                                               "extra_script=",
                                               "worker_threads=",
                                               "aslr_mode=",
+                                              "backup=",
+                                              "file_context=",
                                               ],
                              extra_option_handler=option_handler)
 
