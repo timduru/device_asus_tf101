@@ -111,3 +111,4 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_USES_SECURE_SERVICES := true
 
 BOARD_MALLOC_ALIGNMENT := 16
+TARGET_EXTRA_CFLAGS := $(call cc-option,-mtune=cortex-a9) $(call cc-option,-mcpu=cortex-a9)
