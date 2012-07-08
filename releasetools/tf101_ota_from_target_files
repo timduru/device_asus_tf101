@@ -100,7 +100,11 @@ OPTIONS.selinux_fc = None
 
 
 LOCAL_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-DEV_OUT_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/tf101/'))
+DEV_ANDROID_OUT_DIR = os.getenv("ANDROID_PRODUCT_OUT")
+if DEV_ANDROID_OUT_DIR is not None:
+  DEV_OUT_DIR = DEV_ANDROID_OUT_DIR
+else:
+  DEV_OUT_DIR = os.path.abspath(os.path.join(LOCAL_DIR, '../../../out/target/product/tf101/'))
 
 def MostPopularKey(d, default):
   """Given a dict, return the key corresponding to the largest
