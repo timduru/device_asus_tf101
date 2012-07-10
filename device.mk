@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/asus/tf101/device_base.mk)
+$(call inherit-product, $(LOCAL_PATH)/device_base.mk)
 
 # Add commands which are tf101 specific after here
 $(call inherit-product-if-exists, vendor/eos/common.mk)

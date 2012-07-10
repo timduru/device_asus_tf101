@@ -29,17 +29,16 @@ SMALLER_FONT_FOOTPRINT := true
 # Use the non-open-source parts, if they're present
 -include vendor/asus/tf101/BoardConfigVendor.mk
 
-
-
-
 TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := tegra
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_BOOTLOADER_BOARD_NAME := tf101
+TARGET_BOOTLOADER_BOARD_NAME := ventana
 
 BOARD_KERNEL_CMDLINE := 
 BOARD_KERNEL_BASE := 0x10000000
@@ -61,18 +60,15 @@ USE_OPENGL_RENDERER := true
 
 # device-specific extensions to the updater binary
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_tf101
-TARGET_RELEASETOOLS_EXTENSIONS := device/asus/tf101
+TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 5242880
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 14372306944
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_FLASH_BLOCK_SIZE := 4096
 
-TARGET_PREBUILT_KERNEL := device/asus/tf101/kernel
-
-#TARGET_PROVIDES_INIT_RC := true
-#TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -105,10 +101,8 @@ TARGET_HAS_DOCK_BATTERY := true
 TARGET_RECOVERY_PRE_COMMAND := "echo 'boot-recovery' > /dev/block/mmcblk0p3; sync"
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/asus/tf101/releasetools/tf101_ota_from_target_files
 
-# Use this flag if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
-
-BOARD_USES_SECURE_SERVICES := true
+# Avoid the generation of ldrcc instructions
+NEED_WORKAROUND_CORTEX_A9_745320 := true
 
 BOARD_MALLOC_ALIGNMENT := 16
 TARGET_EXTRA_CFLAGS := $(call cc-option,-mtune=cortex-a9) $(call cc-option,-mcpu=cortex-a9)

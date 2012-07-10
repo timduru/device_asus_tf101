@@ -4,20 +4,19 @@ import init.ventana.keyboard.rc
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
-    export EXTERNAL_STORAGE /mnt/sdcard
-    mkdir /mnt/sdcard 0000 system system
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
     # for backwards compatibility
-    symlink /mnt/sdcard /sdcard
-
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
     # create directory for mounting usb drives
     mkdir /Removable 0755 media_rw media_rw
 
 on fs
-    mount ext4 /dev/block/mmcblk0p1 /system wait noauto_da_alloc ro
-    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
-    mount ext4 /dev/block/mmcblk0p7 /data wait noatime nodiratime nosuid nodev noauto_da_alloc,errors=panic
-    mount ext4 /dev/block/mmcblk0p2 /cache wait noatime nodiratime nosuid nodev noauto_da_alloc,errors=panic
+    mount_all /fstab.ventana
+    setprop ro.crypto.fuse_sdcard true
     mount tmpfs tmpfs /Removable mode=0755,gid=1000
 
     # temp fix for external storage mounts
@@ -34,8 +33,8 @@ on post-fs-data
 
     mkdir /data/misc/wminput 0776 system system
 
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
+    # we will remap this as /storage/sdcard0 with the sdcard fuse tool
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
     # Set indication (checked by vold) that we have finished this action
@@ -131,7 +130,7 @@ service wifimacwriter /system/bin/wifimacwriter
     oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
-    -Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -e/data/misc/wifi/entropy.bin
+    -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
 #   user wifi
@@ -187,9 +186,9 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     oneshot
 #Sensor load calibration files end
 
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
-# deamon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media wil be created with user and group media_rw (1023)
+# create virtual SD card at /storage/sdcard0, based on the /data/media directory
+# daemon will drop to user/group system/media_rw after initializing
+# underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard /data/media 1023 1023
     class late_start
 

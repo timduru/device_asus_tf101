@@ -14,20 +14,13 @@
 # limitations under the License.
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/asus/tf101/kernel
+    LOCAL_KERNEL := $(LOCAL_PATH)/kernel
 else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-DEVICE_PACKAGE_OVERLAYS := device/asus/tf101/overlay
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
-# This device is xhdpi.  However the platform doesn't
-# currently contain all of the bitmaps at xhdpi density so
-# we do this little trick to fall back to the hdpi version
-# if the xhdpi doesn't exist.
-#PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xlarge sw600dp sw720dp
-#PRODUCT_AAPT_PREF_CONFIG := xlarge
-#PRODUCT_AAPT_PREF_CONFIG :=
 
 PRODUCT_COPY_FILES := \
     $(LOCAL_KERNEL):kernel \
@@ -118,7 +111,7 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk files
 PRODUCT_COPY_FILES += \
-    device/asus/tf101/ramdisk/init:root/init \
+    device/asus/tf101/fstab.ventana:root/fstab.ventana \
     device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
     device/asus/tf101/ramdisk/init.ventana.keyboard.rc:root/init.ventana.keyboard.rc \
     device/asus/tf101/ramdisk/init.ventana.usb.rc:root/init.ventana.usb.rc \
@@ -191,13 +184,10 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
     device/asus/tf101/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
 
-# Extra (for convenience)
-PRODUCT_COPY_FILES += \
-    device/asus/tf101/xbin/remount:system/xbin/remount
-
 PRODUCT_PROPERTY_OVERRIDES := \
-    wifi.interface=wlan0
-    wifi.supplicant_scan_interval=15
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15 \
+    ro.sf.lcd_density=160
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -207,26 +197,25 @@ include frameworks/native/build/tablet-dalvik-heap.mk
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
-    frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/base/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
+    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     device/asus/tf101/etc/permissions/android.hardware.tf101.xml:system/etc/permissions/android.hardware.tf101.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 PRODUCT_PACKAGES := \
     audio.a2dp.default \
+    audio.usb.default \
     librs_jni \
     make_ext4fs \
     l2ping \
@@ -234,8 +223,10 @@ PRODUCT_PACKAGES := \
     bttest \
     com.android.future.usb.accessory \
     whisperd \
-    blobpack_tf \
-    AutoParts
+    libaudioutils \
+    libinvensense_mpl \
+    blobpack_tf
+#    AutoParts
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -244,16 +235,13 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # media config xml file
 PRODUCT_COPY_FILES += \
-    device/asus/tf101/etc/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # Bluetooth config file
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
 $(call inherit-product-if-exists, vendor/asus/tf101/device-vendor.mk)
-
-#WIFI_BAND             := 802_11_ABGN
-#$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 ifneq ($(EOS_RELEASE),)
 PRODUCT_PROPERTY_OVERRIDES += \

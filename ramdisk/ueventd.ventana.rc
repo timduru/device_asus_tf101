@@ -37,3 +37,4 @@
 /dev/ttyUSB3    0660    radio    system
 /dev/ttyUSB4    0660    radio    system
 /dev/ttyUSB5    0660    radio    system
+/dev/rfkill     0660    wifi    wifi

@@ -19,5 +19,5 @@
     <bool name="has_powercontrol_widget">false</bool>
 
     <!-- Boolean indicating whether the device has proprietary settings -->
-    <bool name="config_hasDeviceSettings">true</bool>
+<!--     <bool name="config_hasDeviceSettings">true</bool> -->
 </resources>
