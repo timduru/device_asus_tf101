@@ -203,7 +203,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-include frameworks/base/build/tablet-dalvik-heap.mk
+include frameworks/native/build/tablet-dalvik-heap.mk
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
