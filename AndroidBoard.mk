@@ -33,6 +33,7 @@ include $(COMMON_DIR)/TegraBoard.mk
 endif
 
 subdir_makefiles:= \
+    $(LOCAL_PATH)/audio/Android.mk \
     $(LOCAL_PATH)/blobpack/Android.mk
 #    $(LOCAL_PATH)/AutoParts/Android.mk
 
