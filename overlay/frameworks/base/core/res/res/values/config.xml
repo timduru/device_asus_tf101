@@ -220,5 +220,5 @@
     <dimen name="config_viewConfigurationTouchSlop">8dp</dimen>
 
     <!-- Boolean indicating whether the device has a dock battery -->
-<!--     <bool name="config_hasDockBattery">true</bool> -->
+    <bool name="config_hasDockBattery">true</bool>
 </resources>
