@@ -221,4 +221,7 @@
 
     <!-- Boolean indicating whether the device has a dock battery -->
     <bool name="config_hasDockBattery">true</bool>
+
+    <!-- Boolean indicating whether the device has a touchpad -->
+    <bool name="config_hasTouchpad">true</bool>
 </resources>

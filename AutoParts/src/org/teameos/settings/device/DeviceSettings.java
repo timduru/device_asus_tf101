@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.teameos.jellybean.settings.EOSConstants;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,9 +35,9 @@ public class DeviceSettings extends PreferenceActivity implements
     private static final String KEYSWAP_PROPERTY = "sys.dockkeys.change";
 
     private ListPreference mKeyboardLayout;
-    private ListPreference mTouchpadModeSelectorPref;
+    private ListPreference mTouchpadMode;
 
-    private static final String TAG = "DeviceSettings";
+//    private static final String TAG = "DeviceSettings";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +47,12 @@ public class DeviceSettings extends PreferenceActivity implements
                 PREF_KEYBOARD_LAYOUT);
         mKeyboardLayout.setOnPreferenceChangeListener(this);
 
-        mTouchpadModeSelectorPref = (ListPreference) getPreferenceScreen().findPreference(
+        mTouchpadMode = (ListPreference) getPreferenceScreen().findPreference(
                 PREF_MODE_SELECTOR);
-        int mode = getTouchpadModeSetting(0);
-        mTouchpadModeSelectorPref.setValue(String.valueOf(mode));
-        mTouchpadModeSelectorPref.setSummary(mTouchpadModeSelectorPref.getEntries()[mode]);
-        mTouchpadModeSelectorPref.setOnPreferenceChangeListener(this);
+        int touchpadMode = getTouchpadModeSetting(0);
+        mTouchpadMode.setValue(String.valueOf(touchpadMode));
+        mTouchpadMode.setSummary("Touchpad mode set to " + mTouchpadMode.getEntries()[touchpadMode]);
+        mTouchpadMode.setOnPreferenceChangeListener(this);
     }
 
     private String getDataDir() {
@@ -89,18 +91,16 @@ public class DeviceSettings extends PreferenceActivity implements
                     .setMessage(R.string.caution_keyboard_layout)
                     .setPositiveButton(android.R.string.yes,
                             new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog,
+                                public void onClick(DialogInterface dialog,
                                 int which) {
-                            setNewKeyboardLanguage(newLanguage);
-                        }
-                    }).setNegativeButton(android.R.string.no, null)
-                    .create();
+                                    setNewKeyboardLanguage(newLanguage);
+                                }
+                    }).setNegativeButton(android.R.string.no, null).create();
 
             dialog.show();
-        } else if (preference.equals (mTouchpadModeSelectorPref)) {
-            final String newMode = (String) value;
-            putTouchpadModeSetting(Integer.parseInt((String)newMode));
+        } else if (preference.equals (mTouchpadMode)) {
+            final String newTouchpadMode = (String) value;
+            putTouchpadModeSetting(Integer.parseInt((String)newTouchpadMode));
         }
         return false;
     }
@@ -124,7 +124,7 @@ public class DeviceSettings extends PreferenceActivity implements
         int result = defaultValue;
         try {
             result = Settings.System.getInt(getContentResolver(),
-                    Settings.System.EOS_TOUCHPAD_MODE);
+                    EOSConstants.DEVICE_SETTINGS_TOUCHPAD_MODE);
         } catch (SettingNotFoundException snfe) {
         }
         return result;
@@ -133,8 +133,8 @@ public class DeviceSettings extends PreferenceActivity implements
     private void putTouchpadModeSetting(int newMode)
     {
         android.provider.Settings.System.putInt(getContentResolver(),
-                Settings.System.EOS_TOUCHPAD_MODE, newMode);
-        mTouchpadModeSelectorPref.setValue(String.valueOf(newMode));
-        mTouchpadModeSelectorPref.setSummary(mTouchpadModeSelectorPref.getEntries()[newMode]);
+                EOSConstants.DEVICE_SETTINGS_TOUCHPAD_MODE, newMode);
+        mTouchpadMode.setValue(String.valueOf(newMode));
+        mTouchpadMode.setSummary("Touchpad mode set to " + mTouchpadMode.getEntries()[newMode]);
     }
 }
