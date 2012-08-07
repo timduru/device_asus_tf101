@@ -56,5 +56,5 @@ PRODUCT_MODEL := Transformer TF101
 PRODUCT_MANUFACTURER := asus
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=US_epad \
-    BUILD_FINGERPRINT="asus/US_epad/TF101:4.0.3/IML74K/US_epad-9.2.1.11-20120221:user/release-keys" \
-    PRIVATE_BUILD_DESC="US_epad-user 4.0.3 IML74K US_epad-9.2.1.11-20120221 release-keys"
+    BUILD_FINGERPRINT="asus/US_epad/TF101:4.0.3/IML74K/US_epad-9.2.1.27-20120615:user/release-keys" \
+    PRIVATE_BUILD_DESC="US_epad-user 4.0.3 IML74K US_epad-9.2.1.27-20120615 release-keys"
