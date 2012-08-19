@@ -22,6 +22,10 @@
     <ctl name="Right Speaker Mixer DACR Switch" value="0"/>
     <ctl name="Left Speaker Mixer DACL Switch" value="0"/>
   </path>
+  
+  <path name="hdmi">
+    <ctl name="Speaker Switch" value="0" />
+  </path>
 
   <path name="main-mic-top">
     <ctl name="Int Mic Switch" value="1" />
