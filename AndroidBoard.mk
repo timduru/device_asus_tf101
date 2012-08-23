@@ -24,8 +24,6 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-ALL_PREBUILT += $(INSTALLED_KERNEL_TARGET)
-
 COMMON_DIR := vendor/nvidia/common/
 
 ifeq ($(wildcard $(COMMON_DIR)/TegraBoard.mk),$(COMMON_DIR)/TegraBoard.mk)
