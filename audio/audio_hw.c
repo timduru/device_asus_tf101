@@ -42,6 +42,7 @@
 
 #define PCM_CARD 0
 #define PCM_DEVICE 0
+#define PCM_DEVICE_HDMI 1
 #define PCM_DEVICE_SCO 2
 
 #define OUT_PERIOD_SIZE 1024
@@ -191,8 +192,10 @@ static void release_buffer(struct resampler_buffer_provider *buffer_provider,
 
 static void select_devices(struct audio_device *adev)
 {
+    ALOGD("select_devices+");
     int headphone_on;
     int speaker_on;
+    int hdmi_on;
     int main_mic_on;
     int fm34_dev, wm8903_dev;
 
@@ -206,16 +209,20 @@ static void select_devices(struct audio_device *adev)
     if (wm8903_dev < 0)
         ALOGE("open %s failed", AUDIO_DEV_PATH);
 
-    headphone_on = adev->devices & (AUDIO_DEVICE_OUT_WIRED_HEADSET |
-                                    AUDIO_DEVICE_OUT_WIRED_HEADPHONE);
+    headphone_on = adev->devices & (AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE);
     speaker_on = adev->devices & AUDIO_DEVICE_OUT_SPEAKER;
+    hdmi_on = adev->devices & AUDIO_DEVICE_OUT_AUX_DIGITAL;
     main_mic_on = adev->devices & AUDIO_DEVICE_IN_BUILTIN_MIC;
+
+    ALOGV("hp=%c speaker=%c main-mic=%c, hdmi=%c, isRecording=%c", headphone_on ? 'y' : 'n',
+          speaker_on ? 'y' : 'n', main_mic_on ? 'y' : 'n', hdmi_on ? 'y' : 'n', isRecording ? 'y' : 'n');
 
     reset_mixer_state(adev->ar);
 
     if (wm8903_dev > 0 && fm34_dev > 0){
-        if (speaker_on || headphone_on){
+        if (speaker_on || headphone_on || hdmi_on){
             if (isRecording){
+	   	ALOGD("was previously recording ");
                 ioctl(fm34_dev, DSP_CONTROL, END_RECORDING);
                 ioctl(wm8903_dev, AUDIO_CAPTURE_MODE, OUTPUT_SOURCE_NORMAL);
                 isRecording = false;
@@ -225,6 +232,7 @@ static void select_devices(struct audio_device *adev)
 
         if (main_mic_on) {
             if (!isRecording) {
+	   	ALOGD("starting recording");
                 isRecording = true;
                 ioctl(fm34_dev, DSP_CONTROL, START_RECORDING);
                 ioctl(wm8903_dev, AUDIO_CAPTURE_MODE, INPUT_SOURCE_NORMAL);
@@ -236,6 +244,8 @@ static void select_devices(struct audio_device *adev)
         audio_route_apply_path(adev->ar, "speaker");
     if (headphone_on)
         audio_route_apply_path(adev->ar, "headphone");
+    if (hdmi_on)
+        audio_route_apply_path(adev->ar, "hdmi");
     if (main_mic_on) {
         if (adev->orientation == ORIENTATION_LANDSCAPE)
             audio_route_apply_path(adev->ar, "main-mic-left");
@@ -245,14 +255,13 @@ static void select_devices(struct audio_device *adev)
 
     update_mixer_state(adev->ar);
 
-    ALOGV("hp=%c speaker=%c main-mic=%c", headphone_on ? 'y' : 'n',
-          speaker_on ? 'y' : 'n', main_mic_on ? 'y' : 'n');
 
     if(fm34_dev > 0)
         close(fm34_dev);
 
     if(wm8903_dev > 0)
         close(wm8903_dev);
+    ALOGD("select_devices-");
 }
 
 /* must be called with hw device and output stream mutexes locked */
@@ -310,6 +319,10 @@ static int start_output_stream(struct stream_out *out)
      * (speaker/headphone) PCM or the BC SCO PCM open at
      * the same time.
      */
+    if(adev->devices & AUDIO_DEVICE_OUT_AUX_DIGITAL) {
+        device = PCM_DEVICE_HDMI;
+        out->pcm_config = &pcm_config_out;
+    } else
     if (adev->devices & AUDIO_DEVICE_OUT_ALL_SCO) {
         device = PCM_DEVICE_SCO;
         out->pcm_config = &pcm_config_sco;
@@ -335,6 +348,8 @@ static int start_output_stream(struct stream_out *out)
             do_in_standby(adev->active_in);
         pthread_mutex_unlock(&adev->active_in->lock);
     }
+
+    ALOGD("outpcm open: card=%d, device=%d, rate=%d", PCM_CARD, device, out->pcm_config->rate);
 
     out->pcm = pcm_open(PCM_CARD, device, PCM_OUT | PCM_NORESTART, out->pcm_config);
 
@@ -602,11 +617,11 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
         val = atoi(value);
         if (((adev->devices & AUDIO_DEVICE_OUT_ALL) != val) && (val != 0)) {
             /*
-             * If SCO is turned on/off, we need to put audio into standby
-             * because SCO uses a different PCM.
+             * If SCO or HDMI is turned on/off, we need to put audio into standby
+             * because they use a different PCM PORT.
              */
-            if ((val & AUDIO_DEVICE_OUT_ALL_SCO) ^
-                    (adev->devices & AUDIO_DEVICE_OUT_ALL_SCO)) {
+            if ( (val & AUDIO_DEVICE_OUT_ALL_SCO) ^ (adev->devices & AUDIO_DEVICE_OUT_ALL_SCO)
+		|| (val & AUDIO_DEVICE_OUT_AUX_DIGITAL) ^ (adev->devices & AUDIO_DEVICE_OUT_AUX_DIGITAL)) {
                 pthread_mutex_lock(&out->lock);
                 do_out_standby(out);
                 pthread_mutex_unlock(&out->lock);
@@ -1267,6 +1282,7 @@ static uint32_t adev_get_supported_devices(const struct audio_hw_device *dev)
             AUDIO_DEVICE_OUT_SPEAKER |
             AUDIO_DEVICE_OUT_WIRED_HEADSET |
             AUDIO_DEVICE_OUT_WIRED_HEADPHONE |
+            AUDIO_DEVICE_OUT_AUX_DIGITAL |
             AUDIO_DEVICE_OUT_ALL_SCO |
             AUDIO_DEVICE_OUT_DEFAULT |
             /* IN */
