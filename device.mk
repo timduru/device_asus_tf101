@@ -17,5 +17,5 @@
 $(call inherit-product, $(LOCAL_PATH)/device_base.mk)
 
 # Add commands which are tf101 specific after here
+BOOTANIMATION_RESOLUTION := 1280x720_small
 $(call inherit-product-if-exists, vendor/eos/common.mk)
-$(call inherit-product-if-exists, vendor/eos/tablets/common.mk)
