@@ -15,9 +15,9 @@
 -->
 
 <resources>
-    <!-- No powercontrol widget for tablets -->
-    <bool name="has_powercontrol_widget">false</bool>
+    <!-- Powercontrol widget for tablets -->
+    <bool name="has_powercontrol_widget">true</bool>
 
-    <!-- Boolean indicating whether the device has proprietary settings -->
-    <bool name="config_hasDeviceSettings">true</bool>
+    <!-- Whether or not the dock settings are to be displayed for this device when docked -->
+    <bool name="has_dock_settings">true</bool>
 </resources>

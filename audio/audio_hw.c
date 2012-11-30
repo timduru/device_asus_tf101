@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2012 RaymanFX
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,7 @@
  */
 
 #define LOG_TAG "audio_hw_primary"
-#define LOG_NDEBUG 0
+/*#define LOG_NDEBUG 0*/
 
 #include <errno.h>
 #include <pthread.h>
@@ -54,9 +55,9 @@
 #define IN_PERIOD_COUNT 4
 #define IN_SAMPLING_RATE 44100
 
-#define SCO_PERIOD_SIZE 256
+#define SCO_PERIOD_SIZE 1024
 #define SCO_PERIOD_COUNT 4
-#define SCO_SAMPLING_RATE 8000
+#define SCO_SAMPLING_RATE 44100
 
 /* minimum sleep time in out_write() when write threshold is not reached */
 #define MIN_WRITE_SLEEP_US 2000
@@ -340,13 +341,14 @@ static int start_output_stream(struct stream_out *out)
      * the most common rate, but group 2 is required for SCO.
      */
     if (adev->active_in) {
-        pthread_mutex_lock(&adev->active_in->lock);
+        struct stream_in *in = adev->active_in;
+        pthread_mutex_lock(&in->lock);
         if (((out->pcm_config->rate % 8000 == 0) &&
-                 (adev->active_in->pcm_config->rate % 8000) != 0) ||
+                 (in->pcm_config->rate % 8000) != 0) ||
                  ((out->pcm_config->rate % 11025 == 0) &&
-                 (adev->active_in->pcm_config->rate % 11025) != 0))
-            do_in_standby(adev->active_in);
-        pthread_mutex_unlock(&adev->active_in->lock);
+                 (in->pcm_config->rate % 11025) != 0))
+            do_in_standby(in);
+        pthread_mutex_unlock(&in->lock);
     }
 
     ALOGD("outpcm open: card=%d, device=%d, rate=%d", PCM_CARD, device, out->pcm_config->rate);
@@ -409,13 +411,14 @@ static int start_input_stream(struct stream_in *in)
      * the most common rate, but group 2 is required for SCO.
      */
     if (adev->active_out) {
-        pthread_mutex_lock(&adev->active_out->lock);
+        struct stream_out *out = adev->active_out;
+        pthread_mutex_lock(&out->lock);
         if (((in->pcm_config->rate % 8000 == 0) &&
-                 (adev->active_out->pcm_config->rate % 8000) != 0) ||
+                 (out->pcm_config->rate % 8000) != 0) ||
                  ((in->pcm_config->rate % 11025 == 0) &&
-                 (adev->active_out->pcm_config->rate % 11025) != 0))
-            do_out_standby(adev->active_out);
-        pthread_mutex_unlock(&adev->active_out->lock);
+                 (out->pcm_config->rate % 11025) != 0))
+            do_out_standby(out);
+        pthread_mutex_unlock(&out->lock);
     }
 
     in->pcm = pcm_open(PCM_CARD, device, PCM_IN, in->pcm_config);
@@ -1276,23 +1279,6 @@ static int adev_close(hw_device_t *device)
     return 0;
 }
 
-static uint32_t adev_get_supported_devices(const struct audio_hw_device *dev)
-{
-    return (/* OUT */
-            AUDIO_DEVICE_OUT_SPEAKER |
-            AUDIO_DEVICE_OUT_WIRED_HEADSET |
-            AUDIO_DEVICE_OUT_WIRED_HEADPHONE |
-            AUDIO_DEVICE_OUT_AUX_DIGITAL |
-            AUDIO_DEVICE_OUT_ALL_SCO |
-            AUDIO_DEVICE_OUT_DEFAULT |
-            /* IN */
-            AUDIO_DEVICE_IN_BUILTIN_MIC |
-            AUDIO_DEVICE_IN_WIRED_HEADSET |
-            AUDIO_DEVICE_IN_BACK_MIC |
-            AUDIO_DEVICE_IN_ALL_SCO |
-            AUDIO_DEVICE_IN_DEFAULT);
-}
-
 static int adev_open(const hw_module_t* module, const char* name,
                      hw_device_t** device)
 {
@@ -1307,11 +1293,10 @@ static int adev_open(const hw_module_t* module, const char* name,
         return -ENOMEM;
 
     adev->hw_device.common.tag = HARDWARE_DEVICE_TAG;
-    adev->hw_device.common.version = AUDIO_DEVICE_API_VERSION_1_0;
+    adev->hw_device.common.version = AUDIO_DEVICE_API_VERSION_2_0;
     adev->hw_device.common.module = (struct hw_module_t *) module;
     adev->hw_device.common.close = adev_close;
 
-    adev->hw_device.get_supported_devices = adev_get_supported_devices;
     adev->hw_device.init_check = adev_init_check;
     adev->hw_device.set_voice_volume = adev_set_voice_volume;
     adev->hw_device.set_master_volume = adev_set_master_volume;
@@ -1345,7 +1330,7 @@ struct audio_module HAL_MODULE_INFO_SYM = {
         .module_api_version = AUDIO_MODULE_API_VERSION_0_1,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = AUDIO_HARDWARE_MODULE_ID,
-        .name = "tf101 audio HW HAL",
+        .name = "TF101 audio HW HAL",
         .author = "The Android Open Source Project",
         .methods = &hal_module_methods,
     },
