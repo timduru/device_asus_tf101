@@ -10,10 +10,10 @@
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
 
-dev_mount microsd /Removable/MicroSD auto /devices/platform/sdhci-tegra.2/mmc_host/mmc1
+dev_mount microsd /storage/sdcard1 auto /devices/platform/sdhci-tegra.2/mmc_host/mmc1
 
-dev_mount usbdisk1 /Removable/USBdisk1 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1:1 /devices/platform/tegra-ehci.2/usb1/1-1/1-1:1
+dev_mount usbdisk1 /storage/usbdisk0 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1:1 /devices/platform/tegra-ehci.2/usb1/1-1/1-1:1
 
-dev_mount usbdisk2 /Removable/USBdisk2 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.2 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.2
+dev_mount usbdisk2 /storage/usbdisk1 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.2 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.2
 
-dev_mount sdreader /Removable/SD auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.3 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.3
+dev_mount sdreader /storage/sdcard2 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.3 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.3

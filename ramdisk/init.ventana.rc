@@ -4,26 +4,38 @@ import init.ventana.keyboard.rc
 on early-init
     mount debugfs debugfs /sys/kernel/debug
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0050 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    # for backwards compatibility
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
+on init
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/emulated 0555 root root
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export SECONDARY_STORAGE /storage/sdcard1
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
 
-    # create directory for mounting usb drives
-    mkdir /Removable 0755 media_rw media_rw
+    # for backwards compatibility
+    symlink /storage/emulated/legacy /sdcard	
+    symlink /storage/emulated/legacy /mnt/sdcard	
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # make the pathes for the external media mounts
+    mkdir /storage/sdcard1 0666 system system
+    mkdir /storage/sdcard2 0666 system system
+    mkdir /storage/usbdisk0 0666 system system
+    mkdir /storage/usbdisk1 0666 system system
+
+    symlink /storage/sdcard1 /extSdCard
+    symlink /storage/sdcard1 /mnt/extSdCard
 
 on fs
     mount_all /fstab.ventana
     setprop ro.crypto.fuse_sdcard true
-    mount tmpfs tmpfs /Removable mode=0755,gid=1000
+    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
 
-    # temp fix for external storage mounts
-    mkdir /Removable/MicroSD 0666 system system
-    mkdir /Removable/SD 0666 system system
-    mkdir /Removable/USBdisk1 0666 system system
-    mkdir /Removable/USBdisk2 0666 system system
+# virtual sdcard daemon running as media_rw (1023)
+    service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+    class late_start
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
