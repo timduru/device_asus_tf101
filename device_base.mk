@@ -123,7 +123,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/bin/glgps:system/bin/glgps \
     device/asus/tf101/prebuilt/bin/wifimacwriter:system/bin/wifimacwriter \
     device/asus/tf101/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
-    device/asus/tf101/prebuilt/etc/asound.conf:system/etc/asound.conf \
+    device/asus/tf101/audio/asound.conf:system/etc/asound.conf \
     device/asus/tf101/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/asus/tf101/vold.fstab:system/etc/vold.fstab \
     device/asus/tf101/prebuilt/wifi/nvram_murata.txt:system/etc/nvram_murata.txt \
@@ -235,11 +235,11 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # media config xml file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/etc/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/audio/media_profiles.xml:system/etc/media_profiles.xml
 
 # media codec config xml file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml
+    $(LOCAL_PATH)/audio/media_codecs.xml:system/etc/media_codecs.xml
 
 # Bluetooth config file
 PRODUCT_COPY_FILES += \
@@ -247,11 +247,11 @@ PRODUCT_COPY_FILES += \
 
 # audio mixer paths
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
 # audio policy configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 $(call inherit-product-if-exists, vendor/asus/tf101/device-vendor.mk)
 
