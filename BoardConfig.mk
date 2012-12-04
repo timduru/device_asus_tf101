@@ -61,15 +61,13 @@ USE_OPENGL_RENDERER := true
 
 # device-specific extensions to the updater binary
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_tf101
-TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
+#TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 5242880
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 14372306944
 BOARD_FLASH_BLOCK_SIZE := 4096
-
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
 
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -112,6 +110,8 @@ TARGET_EXTRA_CFLAGS := $(call cc-option,-mtune=cortex-a9) $(call cc-option,-mcpu
 #instead of subset known to work on all machines
 USE_ALL_OPTIMIZED_STRING_FUNCS := true
 
+# Kernel
+TARGET_PREBUILT_KERNEL := device/asus/tf101/prebuilt/kernel
 TARGET_KERNEL_CONFIG := tf101_eos_defconfig
 
 # Bluetooth
