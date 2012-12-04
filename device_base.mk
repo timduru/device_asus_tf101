@@ -21,9 +21,18 @@ endif
 
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
+# Prebuilt Kernel Image + Modules
 
 PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):prebuilt/kernel \
+    $(LOCAL_KERNEL):kernel \
+    $(LOCAL_PATH)/prebuilt/lib/modules/battery_rvsd.ko:system/lib/modules/battery_rvsd.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/cifs.ko:system/lib/modules/cifs.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/ff-memless.ko:system/lib/modules/ff-memless.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/tun.ko:system/lib/modules/tun.ko \
+    $(LOCAL_PATH)/prebuilt/lib/modules/xpad.ko:system/lib/modules/xpad.ko
+
+PRODUCT_COPY_FILES := \
     device/asus/tf101/prebuilt/lib/egl/libEGL_perfhud.so:system/lib/egl/libEGL_perfhud.so \
     device/asus/tf101/prebuilt/lib/egl/libEGL_tegra.so:system/lib/egl/libEGL_tegra.so \
     device/asus/tf101/prebuilt/lib/egl/libGLESv1_CM_perfhud.so:system/lib/egl/libGLESv1_CM_perfhud.so \
