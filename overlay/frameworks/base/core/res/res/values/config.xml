@@ -114,7 +114,7 @@
     <bool name="config_animateScreenLights">true</bool>
 
     <!-- The number of degrees to rotate the display when the keyboard is open. -->
-    <!-- <integer name="config_lidOpenRotation">0</integer> -->
+    <integer name="config_lidOpenRotation">0</integer>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
