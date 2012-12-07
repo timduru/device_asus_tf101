@@ -250,6 +250,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml
 
+# Camera config file
+PRODUCT_COPY_FILES += \
+    device/asus/tf101/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf \
+
 # Bluetooth config file
 PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
