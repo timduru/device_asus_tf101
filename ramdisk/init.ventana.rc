@@ -198,12 +198,6 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     oneshot
 #Sensor load calibration files end
 
-# create virtual SD card at /storage/sdcard0, based on the /data/media directory
-# daemon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media will be created with user and group media_rw (1023)
-service sdcard /system/bin/sdcard /data/media 1023 1023
-    class late_start
-
 # bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys
 service bugreport /system/bin/dumpstate -d -v -o /data/storage/bugreports/bugreport
     class main
