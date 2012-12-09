@@ -109,7 +109,8 @@ PRODUCT_COPY_FILES := \
 # Bluetooth configuration files
 PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/etc/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \
-    device/asus/tf101/prebuilt/etc/bluetooth/bdaddr:system/etc/bluetooth/bdaddr
+    device/asus/tf101/prebuilt/etc/bluetooth/bdaddr:system/etc/bluetooth/bdaddr \
+    device/asus/tf101/prebuilt/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 # Modules
 PRODUCT_COPY_FILES += \
