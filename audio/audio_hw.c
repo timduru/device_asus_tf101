@@ -240,7 +240,7 @@ static void select_devices(bool in, bool out, struct audio_device *adev)
 
     ALOGV("devices=%d active_out=%c active_in=%c", adev->devices, adev->active_out!=NULL?'y':'n', adev->active_in!=NULL?'y':'n');
 
-    reset_mixer_state(adev->ar);
+//    reset_mixer_state(adev->ar);
 
   if(out) {
     headphone_on = adev->devices & (AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE);
@@ -249,10 +249,12 @@ static void select_devices(bool in, bool out, struct audio_device *adev)
     ALOGV("headphone=%d speaker=%d hdmi=%d isRecording=%d", headphone_on , speaker_on , hdmi_on , isRecording );
 
     if (speaker_on || headphone_on || hdmi_on) { 
-	if(isRecording)
-		switch_recording_mode(END_RECORDING);
-	switch_recording_mode(PLAYBACK);
+	if(!isRecording) {
+            switch_recording_mode(END_RECORDING);
+	    switch_recording_mode(PLAYBACK);
+        }
     }
+
     if (speaker_on)
         audio_route_apply_path(adev->ar, "speaker");
     if (headphone_on)
@@ -365,8 +367,8 @@ static int start_output_stream(struct stream_out *out)
         out->buffer_type = OUT_BUFFER_TYPE_UNKNOWN;
     }
 
-	if(isRecording)
-		switch_recording_mode(END_RECORDING);
+//	if(isRecording)
+//		switch_recording_mode(PLAYBACK);
 
     /*
      * All open PCMs can only use a single group of rates at once:
