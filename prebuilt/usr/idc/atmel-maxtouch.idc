@@ -50,7 +50,7 @@ touch.pressure.scale = 0.0125
 
 # Size
 touch.size.calibration = geometric
-touch.size.scale=0.080
+touch.size.scale=0.500
 
 # Orientation
 touch.orientation.calibration = vector
