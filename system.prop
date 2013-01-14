@@ -7,6 +7,6 @@ ro.opengles.version = 131072
 ro.wifi.country=EU
 ro.ethernet.interface=eth0
 ro.ethernet.autoEnable=yes
-sensor.loop.minms=50
-orientation.magnitude.threshold=200
+sensor.loop.minms=20
+orientation.magnitude.threshold=50
 
