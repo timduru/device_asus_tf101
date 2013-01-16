@@ -249,4 +249,8 @@
      for whether or not this is a hybrid ui device, i.e. grouper. -->
     <bool name="config_isHybridUiDevice">true</bool>
 
+    <!-- don't allow a desiredWallpaper dimension bigger than this value -->
+    <integer name="config_desiredWallpaperSizeMaxWidth">1504</integer>
+    <integer name="config_desiredWallpaperSizeMaxHeight">1280</integer>
+
 </resources>
