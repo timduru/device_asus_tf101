@@ -116,6 +116,7 @@ struct audio_device {
 
     pthread_mutex_t lock; /* see note below on mutex acquisition order */
     int devices;
+    int in_devices;
     bool standby;
     bool mic_mute;
     struct audio_route *ar;
@@ -238,7 +239,7 @@ static void select_devices(bool in, bool out, struct audio_device *adev)
     int main_mic_on;
     int headset_mic_on;
 
-    ALOGV("devices=%d active_out=%c active_in=%c", adev->devices, adev->active_out!=NULL?'y':'n', adev->active_in!=NULL?'y':'n');
+    ALOGV("devices=%d in_devices=%d active_out=%c active_in=%c", adev->devices, adev->in_devices, adev->active_out!=NULL?'y':'n', adev->active_in!=NULL?'y':'n');
 
 //    reset_mixer_state(adev->ar);
 
@@ -264,8 +265,8 @@ static void select_devices(bool in, bool out, struct audio_device *adev)
   }
 
   if(in) {
-    main_mic_on = adev->devices & AUDIO_DEVICE_IN_BUILTIN_MIC;
-    headset_mic_on = adev->devices & AUDIO_DEVICE_IN_WIRED_HEADSET;
+    main_mic_on = adev->in_devices & AUDIO_DEVICE_IN_BUILTIN_MIC;
+    headset_mic_on = adev->in_devices & AUDIO_DEVICE_IN_WIRED_HEADSET;
     ALOGV("main-mic=%d, headset_mic_on=%d, isRecording=%d", main_mic_on , headset_mic_on , isRecording );
 
 	//save_mixer_state(adev->ar);
@@ -431,7 +432,7 @@ static int start_input_stream(struct stream_in *in)
      * it greatly simplifies things to have only the main
      * mic PCM or the BC SCO PCM open at the same time.
      */
-    if (adev->devices & AUDIO_DEVICE_IN_ALL_SCO) {
+    if (adev->in_devices & AUDIO_DEVICE_IN_ALL_SCO) {
         device = PCM_DEVICE_SCO;
         in->pcm_config = &pcm_config_sco;
     } else {
@@ -962,22 +963,21 @@ ALOGD("in_set_parameters:%s", kvpairs);
     if (ret >= 0) {
         val = atoi(value)& ~AUDIO_DEVICE_BIT_IN;
 	ALOGD("in_set_parameters:filtered routing=%d", val);
-        if (((adev->devices & AUDIO_DEVICE_IN_ALL) != val) && (val != 0)) {
+        if ((adev->in_devices != val) && (val != 0)) {
             /*
              * If SCO is turned on/off, we need to put audio into standby
              * because SCO uses a different PCM.
              */
-            if ((val & AUDIO_DEVICE_IN_ALL_SCO) ^
-                    (adev->devices & AUDIO_DEVICE_IN_ALL_SCO)) {
+            if ((val & AUDIO_DEVICE_IN_ALL_SCO) ^ (adev->in_devices & AUDIO_DEVICE_IN_ALL_SCO)) {
                 pthread_mutex_lock(&in->lock);
                 do_in_standby(in);
                 pthread_mutex_unlock(&in->lock);
             }
 
-            adev->devices &= ~AUDIO_DEVICE_IN_ALL;
-            adev->devices |= val;
-            select_devices_in(adev);
+            adev->in_devices &= ~AUDIO_DEVICE_IN_ALL;
+            adev->in_devices |= val;
         }
+        select_devices_in(adev);
     }
     pthread_mutex_unlock(&adev->lock);
 
