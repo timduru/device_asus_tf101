@@ -9,4 +9,5 @@ ro.ethernet.interface=eth0
 ro.ethernet.autoEnable=yes
 sensor.loop.minms=0
 orientation.magnitude.threshold=50
+dalvik.vm.execution-mode=int:jit
 
