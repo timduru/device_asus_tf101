@@ -1,4 +1,4 @@
-package org.teameos.settings.device;
+package org.autoparts.settings.device;
 
 import java.io.File;
 import java.io.FileNotFoundException;

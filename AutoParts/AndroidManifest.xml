@@ -9,16 +9,16 @@
 */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.teameos.settings.device"
+    package="org.autoparts.settings.device"
     android:sharedUserId="android.uid.system" >
     <uses-permission android:name="android.permission.REBOOT" />
     <application android:label="@string/app_name" >
         <activity
             android:name=".DeviceSettings"
-            android:icon="@drawable/eos_device"
+            android:icon="@drawable/device"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="org.teameos.action.LAUNCH_DEVICE_SETTINGS" />
+                <action android:name="org.autoparts.action.LAUNCH_DEVICE_SETTINGS" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
