@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<resources>
+
+<bool name="config_largeHeap">true</bool>
+<bool name="is_large_screen">true</bool>
+
+<!-- Allow tablets to set grid size in settings, false disables -->
+<!-- <bool name="config_workspaceTabletGrid">true</bool> -->
+
+<!-- Whether or not to use the wallpaper hack by default -->
+<bool name="config_workspaceDefaultWallpaperHack">true</bool>
+</resources>
