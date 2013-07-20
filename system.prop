@@ -10,4 +10,4 @@ ro.ethernet.autoEnable=yes
 sensor.loop.minms=0
 orientation.magnitude.threshold=50
 dalvik.vm.execution-mode=int:jit
-
+ro.sys.fw.bg_apps_limit = 20
