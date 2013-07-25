@@ -121,6 +121,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/bin/sensors-config:system/bin/sensors-config \
     device/asus/tf101/prebuilt/bin/glgps:system/bin/glgps \
     device/asus/tf101/prebuilt/bin/wifimacwriter:system/bin/wifimacwriter \
+    device/asus/tf101/prebuilt/xbin/busybox:system/xbin/busybox \
     device/asus/tf101/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
     device/asus/tf101/audio/asound.conf:system/etc/asound.conf \
     device/asus/tf101/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
@@ -225,7 +226,7 @@ PRODUCT_PACKAGES := \
     libaudioutils \
     libinvensense_mpl \
     blobpack_tf \
-    AutoParts
+    #AutoParts
 
 PRODUCT_CHARACTERISTICS := tablet
 
