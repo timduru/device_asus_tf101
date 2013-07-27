@@ -84,7 +84,7 @@
     <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
 
     <!-- Boolean indicating whether the wifi chipset has p2p support -->
-    <bool translatable="false" name="config_wifi_p2p_support">false</bool>
+<!--    <bool translatable="false" name="config_wifi_p2p_support">false</bool> -->
     <!-- Device type information conforming to Annex B format in WiFi Direct specification.
          The default represents a dual-mode smartphone -->
     <string translatable="false" name="config_wifi_p2p_device_type">10-0050F204-5</string>
@@ -225,11 +225,6 @@
          which typically is /data/data/com.android.providers.downloads/files -->
     <integer name="config_downloadDataDirSize">200</integer>
 
-    <!-- Boolean indicating whether the device has a dock battery -->
-    <bool name="config_hasDockBattery">true</bool>
-
-    <!-- Boolean indicating whether the device has a touchpad -->
-    <bool name="config_hasTouchpad">true</bool>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
@@ -247,10 +242,10 @@
 
 <!-- We now need to use a constant bool as reference
      for whether or not this is a hybrid ui device, i.e. grouper. -->
-    <bool name="config_isHybridUiDevice">true</bool>
-
-    <!-- don't allow a desiredWallpaper dimension bigger than this value -->
+<!--    <bool name="config_isHybridUiDevice">true</bool>
+    <bool name="config_hasDockBattery">true</bool>
+    <bool name="config_hasTouchpad">true</bool>
     <integer name="config_desiredWallpaperSizeMaxWidth">1504</integer>
     <integer name="config_desiredWallpaperSizeMaxHeight">1280</integer>
-
+-->
 </resources>
