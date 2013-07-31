@@ -8,16 +8,16 @@
 /system/bin/rm /system/usr/keylayout/asusec.kl
 
 #copy new keyboard and adapt permissions
-/system/xbin/busybox cp /data/data/org.teameos.settings.device/asusec.kcm /system/usr/keychars/asusec.kcm
+/system/xbin/busybox cp /data/data/org.autoparts.settings.device/asusec.kcm /system/usr/keychars/asusec.kcm
 /system/xbin/busybox chown 0:0 /system/usr/keychars/asusec.kcm
 /system/xbin/busybox chmod 644 /system/usr/keychars/asusec.kcm
-/system/xbin/busybox cp /data/data/org.teameos.settings.device/asusec.kl /system/usr/keylayout/asusec.kl
+/system/xbin/busybox cp /data/data/org.autoparts.settings.device/asusec.kl /system/usr/keylayout/asusec.kl
 /system/xbin/busybox chown 0:0 /system/usr/keylayout/asusec.kl
 /system/xbin/busybox chmod 644 /system/usr/keylayout/asusec.kl
 
 #cleanup
-/system/xbin/busybox rm /data/data/org.teameos.settings.device/asusec.kcm
-/system/xbin/busybox rm /data/data/org.teameos.settings.device/asusec.kl
+/system/xbin/busybox rm /data/data/org.autoparts.settings.device/asusec.kcm
+/system/xbin/busybox rm /data/data/org.autoparts.settings.device/asusec.kl
 
 #sync before going ro
 /system/bin/sync
