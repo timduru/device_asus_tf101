@@ -125,7 +125,6 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/data/srs_processing.cfg:system/data/srs_processing.cfg \
     device/asus/tf101/audio/asound.conf:system/etc/asound.conf \
     device/asus/tf101/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
-    device/asus/tf101/vold.fstab:system/etc/vold.fstab \
     device/asus/tf101/prebuilt/wifi/nvram_murata.txt:system/etc/nvram_murata.txt \
     device/asus/tf101/prebuilt/wifi/nvram_nh615_sl101.txt:system/etc/nvram_nh615_sl101.txt \
     device/asus/tf101/prebuilt/wifi/nvram_nh615.txt:system/etc/nvram_nh615.txt \
