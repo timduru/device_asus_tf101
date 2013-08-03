@@ -114,7 +114,6 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/ramdisk/init.ventana.usb.rc:root/init.ventana.usb.rc \
     device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc \
     device/asus/tf101/ramdisk/sbin/keyswap::root/sbin/keyswap \
-    device/asus/tf101/ramdisk/sbin/texfat.ko:root/sbin/texfat.ko
 
 # Misc
 PRODUCT_COPY_FILES += \

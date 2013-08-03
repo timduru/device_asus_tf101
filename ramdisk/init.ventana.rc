@@ -129,7 +129,7 @@ on boot
     chmod 0664 /sys/class/gpio/gpio203/value
 
 #NTFS exFAT support
-    insmod /sbin/texfat.ko
+#    insmod /sbin/texfat.ko
 
 # RIL
 # Define TCP buffer sizes for hspa networks
