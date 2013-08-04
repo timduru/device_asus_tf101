@@ -1,4 +1,6 @@
 package org.autoparts.settings.device;
+import android.os.IPowerManager;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +22,8 @@ import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.os.SystemProperties;
+import android.content.Intent;
+import android.widget.Toast;
 
 public class DeviceSettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
@@ -112,10 +116,24 @@ public class DeviceSettings extends PreferenceActivity implements
         copyAsset(keyboardKcm, KEYBOARD_KCM_FILE);
         copyAsset(keyboardKl, KEYBOARD_KL_FILE);
 
-        SystemProperties.set(KEYSWAP_PROPERTY, "1");
-        while(!SystemProperties.get(KEYSWAP_PROPERTY).equals("2")) {
-        }
+//        SystemProperties.set(KEYSWAP_PROPERTY, "1");
+//        while(!SystemProperties.get(KEYSWAP_PROPERTY).equals("2")) {
+//        }
+/*
+ Intent i = new Intent(android.content.Intent.ACTION_REBOOT);
+    i.putExtra("nowait", 1);
+    i.putExtra("interval", 1);
+    i.putExtra("window", 0);
+    this.sendBroadcast(i);*/
+/*
+    IPowerManager pm = IPowerManager.Stub.asInterface(  ( android.os.IPowerManager.Stub) getSystemService(Context.POWER_SERVICE));
 
+try{
+    pm.reboot(true, null, false);
+}catch(Exception e) {}
+*/
+
+//Toast.makeText(getApplicationContext(), "Change will take place after next reboot", Toast.LENGTH_LONG).show();
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         pm.reboot("");
     }
