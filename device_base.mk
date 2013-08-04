@@ -224,7 +224,7 @@ PRODUCT_PACKAGES := \
     libaudioutils \
     libinvensense_mpl \
     blobpack_tf \
-    #AutoParts
+    AutoParts
 
 PRODUCT_CHARACTERISTICS := tablet
 
