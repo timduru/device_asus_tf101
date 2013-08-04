@@ -240,11 +240,12 @@
 <!-- Separate software navigation bar required on this device. -->
     <bool name="config_showNavigationBar">true</bool>
 
+    <bool name="config_hasDockBattery">true</bool>
+    <bool name="config_hasTouchpad">true</bool>
+
 <!-- We now need to use a constant bool as reference
      for whether or not this is a hybrid ui device, i.e. grouper. -->
 <!--    <bool name="config_isHybridUiDevice">true</bool>
-    <bool name="config_hasDockBattery">true</bool>
-    <bool name="config_hasTouchpad">true</bool>
     <integer name="config_desiredWallpaperSizeMaxWidth">1504</integer>
     <integer name="config_desiredWallpaperSizeMaxHeight">1280</integer>
 -->
