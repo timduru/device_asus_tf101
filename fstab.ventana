@@ -19,17 +19,17 @@
 ## part         - Partition # (1 based), or 'auto' for first usable partition.
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
-/devices/platform/sdhci-tegra.2/mmc_host/mmc1	/storage/sdcard1	auto	default voldmanaged=sdcard:auto
-/devices/platform/tegra-ehci.2/usb1/1-1/1-1.1	/storage/usbdisk0	auto    default voldmanaged=sda:auto
-/devices/platform/tegra-ehci.2/usb2/2-1/2-1.1   /storage/usbdisk0       auto    default voldmanaged=sda:auto
-/devices/platform/tegra-ehci.2/usb2/2-1/2-1:1   /storage/usbdisk0       auto    default voldmanaged=sda:auto
-/devices/platform/tegra-ehci.2/usb1/1-1/1-1:1   /storage/usbdisk0       auto    default voldmanaged=sda:auto
+/devices/platform/sdhci-tegra.2/mmc_host/mmc1	/storage/sdcard1	auto	defaults voldmanaged=sdcard:auto
+/devices/platform/tegra-ehci.2/usb1/1-1/1-1.1	/storage/usbdisk0	auto    defaults voldmanaged=sda:auto
+/devices/platform/tegra-ehci.2/usb2/2-1/2-1.1   /storage/usbdisk0       auto    defaults voldmanaged=sda:auto
+/devices/platform/tegra-ehci.2/usb2/2-1/2-1:1   /storage/usbdisk0       auto    defaults voldmanaged=sda:auto
+/devices/platform/tegra-ehci.2/usb1/1-1/1-1:1   /storage/usbdisk0       auto    defaults voldmanaged=sda:auto
 
-/devices/platform/tegra-ehci.2/usb1/1-1/1-1.2	/storage/usbdisk1	 auto    default voldmanaged=sdb:auto
-/devices/platform/tegra-ehci.2/usb2/2-1/2-1.2	/storage/usbdisk1	 auto    default voldmanaged=sdb:auto
+/devices/platform/tegra-ehci.2/usb1/1-1/1-1.2	/storage/usbdisk1	 auto    defaults voldmanaged=sdb:auto
+/devices/platform/tegra-ehci.2/usb2/2-1/2-1.2	/storage/usbdisk1	 auto    defaults voldmanaged=sdb:auto
 
-/devices/platform/tegra-ehci.2/usb1/1-1/1-1.3	/storage/sdcard2	 auto    default voldmanaged=sdcard:auto
-/devices/platform/tegra-ehci.2/usb2/2-1/2-1.3	/storage/sdcard2	 auto    default voldmanaged=sdcard:auto
+/devices/platform/tegra-ehci.2/usb1/1-1/1-1.3	/storage/sdcard2	 auto    defaults voldmanaged=sdcard:auto
+/devices/platform/tegra-ehci.2/usb2/2-1/2-1.3	/storage/sdcard2	 auto    defaults voldmanaged=sdcard:auto
 
 #dev_mount microsd /storage/sdcard1 auto /devices/platform/sdhci-tegra.2/mmc_host/mmc1
 #dev_mount usbdisk1 /storage/usbdisk0 auto /devices/platform/tegra-ehci.2/usb1/1-1/1-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1.1 /devices/platform/tegra-ehci.2/usb2/2-1/2-1:1 /devices/platform/tegra-ehci.2/usb1/1-1/1-1:1
