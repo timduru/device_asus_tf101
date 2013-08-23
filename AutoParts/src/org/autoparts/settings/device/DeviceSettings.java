@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.teameos.jellybean.settings.EOSConstants;
+import org.meerkats.katkiss.KKC;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -141,8 +141,7 @@ try{
     private int getTouchpadModeSetting(int defaultValue) {
         int result = defaultValue;
         try {
-            result = Settings.System.getInt(getContentResolver(),
-                    EOSConstants.DEVICE_SETTINGS_TOUCHPAD_MODE);
+            result = Settings.System.getInt(getContentResolver(), KKC.S.DEVICE_SETTINGS_TOUCHPAD_MODE);
         } catch (SettingNotFoundException snfe) {
         }
         return result;
@@ -150,8 +149,7 @@ try{
 
     private void putTouchpadModeSetting(int newMode)
     {
-        android.provider.Settings.System.putInt(getContentResolver(),
-                EOSConstants.DEVICE_SETTINGS_TOUCHPAD_MODE, newMode);
+        android.provider.Settings.System.putInt(getContentResolver(), KKC.S.DEVICE_SETTINGS_TOUCHPAD_MODE, newMode);
         mTouchpadMode.setValue(String.valueOf(newMode));
         mTouchpadMode.setSummary("Touchpad mode set to " + mTouchpadMode.getEntries()[newMode]);
     }
