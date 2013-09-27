@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<!--
     <PreferenceCategory
      android:title="@string/dock_settings_title">
 
@@ -11,6 +12,7 @@
         android:entryValues="@array/keyboard_layout_array_values" />
     </PreferenceCategory>
 
+-->
     <PreferenceCategory
         android:title="@string/touchpad_setting_title">
     <ListPreference android:key="touchpad_mode_selector"

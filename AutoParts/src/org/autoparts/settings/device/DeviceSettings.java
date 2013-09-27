@@ -47,10 +47,11 @@ public class DeviceSettings extends PreferenceActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        mKeyboardLayout = (ListPreference) getPreferenceScreen().findPreference(
+/*        mKeyboardLayout = (ListPreference) getPreferenceScreen().findPreference(
                 PREF_KEYBOARD_LAYOUT);
         mKeyboardLayout.setOnPreferenceChangeListener(this);
 
+*/
         mTouchpadMode = (ListPreference) getPreferenceScreen().findPreference(
                 PREF_MODE_SELECTOR);
         int touchpadMode = getTouchpadModeSetting(0);
