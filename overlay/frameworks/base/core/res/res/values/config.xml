@@ -257,4 +257,6 @@
          strictly needed. -->
 <!--    <bool name="config_sf_limitedAlpha">true</bool> -->
 
+    <bool name="config_avoidGfxAccel">true</bool>
+
 </resources>

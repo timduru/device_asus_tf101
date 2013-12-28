@@ -37,7 +37,10 @@ PRODUCT_PACKAGES += \
 
 # Set wifi-only before it's set by generic_no_telephony.mk
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.carrier=wifi-only
+    ro.carrier=wifi-only \
+    ro.boot.selinux=disabled \
+    ro.build.selinux=0
+
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)

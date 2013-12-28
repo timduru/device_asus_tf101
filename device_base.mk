@@ -128,7 +128,9 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/wifi/nvram_murata.txt:system/etc/nvram_murata.txt \
     device/asus/tf101/prebuilt/wifi/nvram_nh615_sl101.txt:system/etc/nvram_nh615_sl101.txt \
     device/asus/tf101/prebuilt/wifi/nvram_nh615.txt:system/etc/nvram_nh615.txt \
-    device/asus/tf101/prebuilt/wifi/nvram.txt:system/etc/nvram.txt
+    device/asus/tf101/prebuilt/wifi/nvram.txt:system/etc/nvram.txt \
+    device/asus/tf101/prebuilt/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    device/asus/tf101/prebuilt/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Input stuff
 PRODUCT_COPY_FILES += \
@@ -223,8 +225,7 @@ PRODUCT_PACKAGES := \
     whisperd \
     libaudioutils \
     libinvensense_mpl \
-    blobpack_tf \
-    AutoParts
+    blobpack_tf 
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -244,7 +245,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf \
 
 # Bluetooth config file
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
 # audio mixer paths
