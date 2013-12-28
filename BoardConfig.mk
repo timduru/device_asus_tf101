@@ -52,7 +52,7 @@ TARGET_NO_RADIOIMAGE := true
 
 #TARGET_BOARD_INFO_FILE := device/asus/tf101/board-info.txt
 
-BOARD_EGL_CFG := device/asus/tf101/egl.cfg
+#BOARD_EGL_CFG := device/asus/tf101/egl.cfg
 
 BOARD_USES_HGL := true
 BOARD_USES_OVERLAY := true
@@ -61,6 +61,9 @@ BOARD_EGL_NEEDS_LEGACY_FB := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 BOARD_EGL_NEEDS_FNW:= true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
+SKIP_SET_METADATA := true
+BOARD_USE_MHEAP_SCREENSHOT := true
+BOARD_USES_HWCOMPOSER := true
 
 BOARD_USE_SKIA_LCDTEXT := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
@@ -113,6 +116,9 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/asus/tf101/releasetools/tf10
 # Avoid the generation of ldrcc instructions
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
+#TARGET_ARCH_LOWMEM := true
+
+
 BOARD_MALLOC_ALIGNMENT := 16
 TARGET_EXTRA_CFLAGS := $(call cc-option,-mtune=cortex-a9) $(call cc-option,-mcpu=cortex-a9)
 
@@ -128,3 +134,5 @@ TARGET_KERNEL_CONFIG := tf101_eos_defconfig
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/asus/tf101/bluetooth
 #HAVE_SELINUX := true
 #RECOVERY_FSTAB_VERSION := 2
+
+SENSORS_NEED_SETRATE_ON_ENABLE := true

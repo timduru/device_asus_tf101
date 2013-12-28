@@ -39,8 +39,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=wifi-only \
     ro.boot.selinux=disabled \
-    ro.build.selinux=0
+    ro.build.selinux=0 \
+    debug.hwui.render_dirty_regions=false \
+    ro.zygote.disable_gl_preload=true \
+    ro.bq.gpu_to_cpu_unsupported=true
 
+#    ro.config.low_ram=true \
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
