@@ -68,6 +68,8 @@ BOARD_USES_HWCOMPOSER := true
 BOARD_USE_SKIA_LCDTEXT := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.board
+
 #TARGET_NO_RECOVERY :=true
 #TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_tf101
@@ -106,9 +108,6 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 
 BOARD_HAVE_GPS := true
-
-# Support for dock battery
-TARGET_HAS_DOCK_BATTERY := true
 
 # Custom Tools
 TARGET_RECOVERY_PRE_COMMAND := "echo 'boot-recovery' > /dev/block/mmcblk0p3; sync"
