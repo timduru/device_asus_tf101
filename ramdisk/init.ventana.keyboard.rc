@@ -1,7 +1,0 @@
-on property:sys.dockkeys.change=1
-    start keyswap
-
-service keyswap /sbin/keyswap
-    class main
-    disabled
-    oneshot

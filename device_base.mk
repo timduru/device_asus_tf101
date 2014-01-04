@@ -110,10 +110,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/asus/tf101/fstab.ventana:root/fstab.ventana \
     device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
-    device/asus/tf101/ramdisk/init.ventana.keyboard.rc:root/init.ventana.keyboard.rc \
     device/asus/tf101/ramdisk/init.ventana.usb.rc:root/init.ventana.usb.rc \
     device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc \
-    device/asus/tf101/ramdisk/sbin/keyswap::root/sbin/keyswap \
 
 # Misc
 PRODUCT_COPY_FILES += \
