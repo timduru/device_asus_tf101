@@ -21,7 +21,7 @@ on init
     mkdir /mnt/media_rw/sdcard2 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk0 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk1 0700 media_rw media_rw
-    mkdir /storage/sdcard0 0666 root root
+#    mkdir /storage/sdcard0 0666 root root
     mkdir /storage/sdcard1 0666 root root
     mkdir /storage/sdcard2 0666 root root
     mkdir /storage/usbdisk0 0666 root root
@@ -87,6 +87,11 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
+#    mkdir /data/location 0770 radio radio
+#    mkdir /data/location/com.broadcom.gps 0770 radio radio
+#    mkdir /data/location/com.broadcom.gps/logs 0770 radio radio
+    
+    
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 

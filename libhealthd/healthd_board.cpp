@@ -4,7 +4,12 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define BATTERY_STATUS_UNKNOWN  1 // equals BatteryManager.BATTERY_STATUS_UNKNOWN constant
+// from BatteryManager.java
+#define BATTERY_STATUS_UNKNOWN 1
+#define BATTERY_STATUS_CHARGING 2
+#define BATTERY_STATUS_DISCHARGING 3
+#define BATTERY_STATUS_NOT_CHARGING 4
+#define BATTERY_STATUS_FULL 5
 
 bool healthd_board_isDockPresent() {
     int fd = open("/sys/class/power_supply/dock_battery/uevent", O_RDONLY, 0);
@@ -43,10 +48,20 @@ int healthd_board_battery_update(struct android::BatteryProperties *props)
         props->dockBatteryStatus = BATTERY_STATUS_UNKNOWN;
     }
 
-    // board reports that the dock is online while is charging with usb, but in fact
-    // the dock only charges with ac
-    if (props->chargerDockAcOnline) {
-        props->chargerDockAcOnline = props->chargerAcOnline;
+
+    // To follow the AOSP battery contract, the board only should report itself
+    // as pluggable when is charging or full charging
+    if (props->batteryStatus != BATTERY_STATUS_CHARGING &&
+        props->batteryStatus != BATTERY_STATUS_FULL) {
+
+        props->chargerAcOnline = false;
+        props->chargerUsbOnline = false;
+        props->chargerWirelessOnline = false;
+    }
+    if (props->dockBatteryStatus != BATTERY_STATUS_CHARGING &&
+        props->dockBatteryStatus != BATTERY_STATUS_FULL) {
+
+        props->chargerDockAcOnline = false;
     }
 
     // return 0 to log periodic polled battery status to kernel log

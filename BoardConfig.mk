@@ -41,6 +41,7 @@ TARGET_CPU_VARIANT := generic
 TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HIGH_OPTIMIZATION := true
+#ARCH_ARM_USE_NON_NEON_MEMCPY := true
 TARGET_BOOTLOADER_BOARD_NAME := ventana
 
 BOARD_KERNEL_CMDLINE := 
@@ -52,7 +53,7 @@ TARGET_NO_RADIOIMAGE := true
 
 #TARGET_BOARD_INFO_FILE := device/asus/tf101/board-info.txt
 
-#BOARD_EGL_CFG := device/asus/tf101/egl.cfg
+BOARD_EGL_CFG := device/asus/tf101/egl.cfg
 
 BOARD_USES_HGL := true
 BOARD_USES_OVERLAY := true
