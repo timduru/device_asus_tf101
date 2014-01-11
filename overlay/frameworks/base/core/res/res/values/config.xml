@@ -259,4 +259,12 @@
 
 <!--    <bool name="config_avoidGfxAccel">true</bool> -->
 
+<!--    <bool name="config_enableWallpaperService">false</bool> -->
+    <bool name="config_dreamsEnabledByDefault">false</bool>
+    <bool name="config_dreamsActivatedOnDockByDefault">false</bool>
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
+    <bool name="config_safe_media_volume_enabled">false</bool>
+
+
+
 </resources>
