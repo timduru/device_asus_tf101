@@ -62,6 +62,8 @@
         <item>"wlan\\d"</item>
     </string-array>
 
+<!--    <string translatable="false" name="config_ethernet_iface_regex">(eth|usb|ppp)\\d</string> -->
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
