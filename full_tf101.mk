@@ -35,6 +35,10 @@ PRODUCT_PACKAGES := \
 PRODUCT_PACKAGES += \
     Camera
 
+# 
+PRODUCT_PACKAGES += \
+   libnetcmdiface 
+
 # Set wifi-only before it's set by generic_no_telephony.mk
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=wifi-only \
