@@ -111,7 +111,7 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/fstab.ventana:root/fstab.ventana \
     device/asus/tf101/ramdisk/init.ventana.rc:root/init.ventana.rc \
     device/asus/tf101/ramdisk/init.ventana.usb.rc:root/init.ventana.usb.rc \
-    device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc \
+    device/asus/tf101/ramdisk/ueventd.ventana.rc:root/ueventd.ventana.rc
 
 # Misc
 PRODUCT_COPY_FILES += \
@@ -207,7 +207,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    device/asus/tf101/prebuilt/etc/permissions/android.hardware.tf101.xml:system/etc/permissions/android.hardware.tf101.xml \
+    device/asus/tf101/prebuilt/etc/permissions/android.hardware.tf101.xml:system/etc/permissions/android.hardware.tf101.xml
 
 PRODUCT_PACKAGES := \
     audio_policy.tegra \
@@ -222,7 +222,7 @@ PRODUCT_PACKAGES := \
     whisperd \
     libaudioutils \
     libinvensense_mpl \
-    blobpack_tf 
+    blobpack_tf
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -239,11 +239,11 @@ PRODUCT_COPY_FILES += \
 
 # Camera config file
 PRODUCT_COPY_FILES += \
-    device/asus/tf101/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf \
+    device/asus/tf101/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
 
 # Bluetooth config file
 #PRODUCT_COPY_FILES += \
-    system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
+#    system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
 # audio mixer paths
 PRODUCT_COPY_FILES += \
