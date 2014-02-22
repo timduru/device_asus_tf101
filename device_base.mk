@@ -222,6 +222,7 @@ PRODUCT_PACKAGES := \
     whisperd \
     libaudioutils \
     libinvensense_mpl \
+    libemoji \
     blobpack_tf
 
 PRODUCT_CHARACTERISTICS := tablet
