@@ -223,7 +223,8 @@ PRODUCT_PACKAGES := \
     libaudioutils \
     libinvensense_mpl \
     libemoji \
-    blobpack_tf
+    blobpack_tf \
+    mkfs.f2fs
 
 PRODUCT_CHARACTERISTICS := tablet
 
