@@ -36,4 +36,6 @@
     <!-- Storage description for SDCard storage. [CHAR LIMIT=NONE] -->
     <add-resource type="string" name="storage_sdreader"></add-resource>
     <string name="storage_sdreader">Dock SD CARD</string>
+
+    <integer name="wallpaper_mode_default">1</integer>
 </resources>
