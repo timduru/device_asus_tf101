@@ -213,6 +213,7 @@ PRODUCT_PACKAGES := \
     audio_policy.tegra \
     audio.primary.tegra \
     audio.a2dp.default \
+    audio.r_submix.default \
     audio.usb.default \
     librs_jni \
     l2ping \
