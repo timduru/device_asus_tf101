@@ -106,7 +106,7 @@
     <item>com.android.location.fused</item>
 
     <!-- The Google Network Location Services location provider -->
-    <item>com.google.android.gms</item>
+    <item>com.google.android.location</item>
     </string-array>
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
