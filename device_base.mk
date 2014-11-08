@@ -225,7 +225,9 @@ PRODUCT_PACKAGES := \
     libinvensense_mpl \
     libemoji \
     blobpack_tf \
+    e2fsck \
     mkfs.f2fs
+
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -238,6 +240,9 @@ PRODUCT_COPY_FILES += \
 
 # media codec config xml file
 PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # Camera config file

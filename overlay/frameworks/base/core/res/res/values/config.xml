@@ -117,7 +117,7 @@
     <bool name="config_animateScreenLights">true</bool>
 
     <!-- The number of degrees to rotate the display when the keyboard is open. -->
-    <integer name="config_lidOpenRotation">0</integer>
+<!--    <integer name="config_lidOpenRotation">0</integer> -->
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
@@ -243,8 +243,6 @@
 <!-- Separate software navigation bar required on this device. -->
     <bool name="config_showNavigationBar">true</bool>
 
-    <bool name="config_hasDockBattery">true</bool>
-    <bool name="config_hasTouchpad">true</bool>
 
 <!-- We now need to use a constant bool as reference
      for whether or not this is a hybrid ui device, i.e. grouper. -->
@@ -269,6 +267,8 @@
 
 <!-- enabling WifiDisplay(Miracast Source)-->
     <bool name="config_enableWifiDisplay">true</bool>
+
+   <bool name="config_enableMultiUserUI">true</bool>
 
 
 </resources>

@@ -39,6 +39,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
    libnetcmdiface 
 
+ PRODUCT_PACKAGES += \
+    libwpa_client \
+    hostapd \
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
 # Set wifi-only before it's set by generic_no_telephony.mk
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=wifi-only \
