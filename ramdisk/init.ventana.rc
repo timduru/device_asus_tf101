@@ -35,6 +35,8 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
+    symlink /dev/asusec /dev/asusdec
+
 on fs
     mount_all /fstab.ventana
     setprop ro.crypto.fuse_sdcard true
