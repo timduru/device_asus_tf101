@@ -53,7 +53,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=0 \
     debug.hwui.render_dirty_regions=false \
     ro.zygote.disable_gl_preload=true \
-    ro.bq.gpu_to_cpu_unsupported=true \
     ro.opengles.surface.rgb565=true
 
 #    ro.config.low_ram=true \

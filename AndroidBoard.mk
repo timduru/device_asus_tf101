@@ -34,6 +34,8 @@ subdir_makefiles:= \
     $(LOCAL_PATH)/audio/Android.mk \
     $(LOCAL_PATH)/blobpack/Android.mk \
     $(LOCAL_PATH)/libhealthd/Android.mk \
+    $(LOCAL_PATH)/hwc/Android.mk \
+
 
 include $(subdir_makefiles)
 
