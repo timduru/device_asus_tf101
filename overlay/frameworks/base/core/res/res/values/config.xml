@@ -265,7 +265,7 @@
     <bool name="config_safe_media_volume_enabled">false</bool>
 
 <!-- enabling WifiDisplay(Miracast Source)-->
-    <bool name="config_enableWifiDisplay">true</bool>
+<!--    <bool name="config_enableWifiDisplay">true</bool> -->
 
    <bool name="config_enableMultiUserUI">true</bool>
 
