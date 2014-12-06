@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES := \
     device/asus/tf101/prebuilt/lib/hw/camera.tegra.so:system/lib/hw/camera.tegra.so \
     device/asus/tf101/prebuilt/lib/hw/gps.ventana.so:system/lib/hw/gps.ventana.so \
     device/asus/tf101/prebuilt/lib/hw/gralloc.tegra.so:system/lib/hw/gralloc.tegra.so \
-    device/asus/tf101/prebuilt/lib/hw/hwcomposer.tegra.so:system/lib/hw/hwcomposer.tegra_katkiss.so \
+    device/asus/tf101/prebuilt/lib/hw/hwcomposer.tegra.so:system/lib/hw/hwcomposer.tegra.so \
     device/asus/tf101/prebuilt/lib/hw/lights.ventana.so:system/lib/hw/lights.ventana.so \
     device/asus/tf101/prebuilt/lib/hw/sensors.ventana.so:system/lib/hw/sensors.ventana.so \
     device/asus/tf101/prebuilt/lib/libardrv_dynamic.so:system/lib/libardrv_dynamic.so \
@@ -210,7 +210,6 @@ PRODUCT_COPY_FILES += \
     device/asus/tf101/prebuilt/etc/permissions/android.hardware.tf101.xml:system/etc/permissions/android.hardware.tf101.xml
 
 PRODUCT_PACKAGES := \
-    hwcomposer.tegra \
     audio_policy.tegra \
     audio.primary.tegra \
     audio.a2dp.default \
