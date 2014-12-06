@@ -33,9 +33,10 @@ void healthd_board_init(struct healthd_config *config)
     config->batteryTemperaturePath       = "/sys/class/power_supply/battery/temp";
     config->batteryTechnologyPath        = "/sys/class/power_supply/battery/technology";
 
-    config->dockBatterySupported         = true;
+/*    config->dockBatterySupported         = true;
     config->dockBatteryStatusPath        = "/sys/class/power_supply/dock_battery/status";
     config->dockBatteryCapacityPath      = "/sys/class/power_supply/dock_battery/capacity";
+*/
 }
 
 int healthd_board_battery_update(struct android::BatteryProperties *props)
@@ -43,11 +44,11 @@ int healthd_board_battery_update(struct android::BatteryProperties *props)
     // board doesn't have the present sysfs for dock battery, so we need to
     // fill it from the uevent sysfs. If the uevent sysfs have some data then
     // the dock battery is present. The status will be UNKNOWN
-    props->dockBatteryPresent = healthd_board_isDockPresent();
+/*    props->dockBatteryPresent = healthd_board_isDockPresent();
     if (!props->dockBatteryPresent) {
         props->dockBatteryStatus = BATTERY_STATUS_UNKNOWN;
     }
-
+*/
 
     // To follow the AOSP battery contract, the board only should report itself
     // as pluggable when is charging or full charging
@@ -58,11 +59,12 @@ int healthd_board_battery_update(struct android::BatteryProperties *props)
         props->chargerUsbOnline = false;
         props->chargerWirelessOnline = false;
     }
-    if (props->dockBatteryStatus != BATTERY_STATUS_CHARGING &&
+/*    if (props->dockBatteryStatus != BATTERY_STATUS_CHARGING &&
         props->dockBatteryStatus != BATTERY_STATUS_FULL) {
 
         props->chargerDockAcOnline = false;
     }
+*/
 
     // return 0 to log periodic polled battery status to kernel log
     return 0;
