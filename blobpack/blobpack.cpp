@@ -69,6 +69,8 @@ main (int argc, char **argv)
   memset(parts, 0, sizeof(part_type)*hdr.num_parts);
   int currentOffset = sizeof(header_type)+sizeof(part_type)*hdr.num_parts;
   printf("Offset: %d\n", currentOffset);
+  
+  size_t max_filesize = 0;
   for (i = 0; i < (int)hdr.num_parts; i++)
   {
       FILE *curfile = fopen (partitions[i].filename, "rb");
@@ -86,19 +88,23 @@ main (int argc, char **argv)
       fsize = ftell (curfile);
       fclose (curfile);
       parts[i].size = fsize;
+      max_filesize = max_filesize < fsize ? fsize : max_filesize; // compute the maximum size of the files in the set
       currentOffset += fsize;
     }
 
   fwrite (parts, sizeof (part_type), hdr.num_parts, outfile);
+  
+  char *buffer = (char *) malloc (max_filesize); // alloc once
   for (i = 0; i < (int)hdr.num_parts; i++)
   {
     // TODO: Don't read in full file in one go. Memory usage!!!
-    char *buffer = (char *) malloc (parts[i].size);
     FILE *currFile = fopen (partitions[i].filename, "rb");	// Read in update file
     fread (buffer, 1, parts[i].size, currFile);
     fclose(currFile);
     fwrite (buffer, 1, parts[i].size, outfile);
   };
+
+  free(buffer); // and free!!
 
   fclose (outfile);
   return 0;
