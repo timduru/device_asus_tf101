@@ -264,9 +264,3 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 $(call inherit-product-if-exists, vendor/asus/tf101/device-vendor.mk)
-
-ifneq ($(EOS_RELEASE),)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=teameos \
-    ro.modversion=Eos-$(EOS_RELEASE)-TF101
-endif
