@@ -1,0 +1,38 @@
+<resources>
+<!-- Miscellaneous -->
+    <bool name="config_largeHeap">true</bool>
+    <bool name="is_tablet">true</bool>
+    <bool name="is_large_tablet">true</bool>
+    <bool name="allow_rotation">true</bool>
+
+
+    <!-- The alpha of the AppsCustomize bg in spring loaded mode -->
+    <integer name="config_workspaceScrimAlpha">55</integer>
+    <integer name="config_allAppsTransitionTime">100</integer>
+    <integer name="config_overviewTransitionTime">250</integer>
+
+    <!-- Out of 100, the percent to shrink the workspace during spring loaded mode. -->
+    <integer name="config_workspaceSpringLoadShrinkPercentage">80</integer>
+    <!-- Out of 100, the percent to shrink the workspace during overview mode. -->
+    <integer name="config_workspaceOverviewShrinkPercentage">70</integer>
+
+    <!-- Fade/zoom in/out duration & scale in a Launcher overlay transition.
+         Note: This should be less than the config_overlayTransitionTime as they happen together. -->
+    <integer name="config_overlayRevealTime">16</integer>
+    <integer name="config_overlayTransitionTime">200</integer>
+    <integer name="config_overlayItemsAlphaStagger">0</integer>
+
+    <!-- This constant stores the ratio of the all apps button drawable which
+         is used for internal (baked-in) padding -->
+    <integer name="config_allAppsButtonPaddingPercent">17</integer>
+
+    <integer name="config_workspaceDefaultScreen">0</integer>
+
+
+    <!-- The duration of the UserFolder opening and closing animation -->
+    <integer name="config_folderExpandDuration">0</integer>
+    <integer name="config_materialFolderExpandDuration">0</integer>
+    <integer name="config_materialFolderExpandStagger">0</integer>
+
+
+</resources>

@@ -55,7 +55,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.zygote.disable_gl_preload=true \
     ro.opengles.surface.rgb565=true
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.external_drive_world_rw=1
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.legacy_dhcp_client=1
+
+#misc
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-flags=--no-watch-dog \
+    dalvik.vm.dex2oat-swap=false
+
+
 #    ro.config.low_ram=true \
+
+$(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
@@ -64,7 +77,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
 
-$(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := full_tf101
@@ -76,3 +88,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=US_epad \
     BUILD_FINGERPRINT="asus/US_epad/TF101:4.0.3/IML74K/US_epad-9.2.1.27-20120615:user/release-keys" \
     PRIVATE_BUILD_DESC="US_epad-user 4.0.3 IML74K US_epad-9.2.1.27-20120615 release-keys"
+

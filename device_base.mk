@@ -230,6 +230,8 @@ PRODUCT_PACKAGES := \
     e2fsck \
     mkfs.f2fs
 
+PRODUCT_PACKAGES +=  libstlport
+
 
 PRODUCT_CHARACTERISTICS := tablet
 
