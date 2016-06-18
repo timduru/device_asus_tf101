@@ -9,5 +9,10 @@ ro.ethernet.interface=eth0
 ro.ethernet.autoEnable=yes
 sensor.loop.minms=0
 orientation.magnitude.threshold=50
-ro.sys.fw.bg_apps_limit = 20
+ro.sys.fw.bg_apps_limit = 12
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.trim_empty_percent=80
+ro.sys.fw.trim_cache_percent=80
+ro.sys.fw.bservice_enable=true
+
 ro.zygote.disable_gl_preload=true
