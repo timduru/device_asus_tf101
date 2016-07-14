@@ -20,6 +20,16 @@
 #
 #$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# Set the physical display size with PRODUCT_AAPT_CONFIG
+# Options are small(~2"-3"), normal(~3"-4"), large(~4"-7"), xlarge(~7" and larger)
+PRODUCT_AAPT_CONFIG := xlarge
+# Set the preferred asset density with PRODUCT_AAPT_PREF_CONFIG
+# See android CCD for valid options
+PRODUCT_AAPT_PREF_CONFIG := mdpi
+# A list of dpis to select prebuilt apk, in precedence order.
+# See android CCD for valid options
+PRODUCT_AAPT_PREBUILT_DPI := mdpi ldpi tvdpi hdpi xhdpi
+
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
